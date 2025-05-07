@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title id="main-id">Timer</title>
+        <link rel="stylesheet" href="css/style-alarm.css">
+    </head>
+
+    <body id="main-body">
+
+        <div id = "title">
+        <h1 id="title-text">Timer<h1>
+        </div>
+
+        <div id="input-div"> 
+            
+        <!--text field for alarm input-->
+        <input type="text" id="input" cols = "100" autocomplete="off"> </input>
+
+        </div>
+        
+
+        <div id="start-div">
+            <button title="Try: 15 minutes or 21:00" class="invalid" id="start" onclick="start_alarm()"> Start </button>
+        </div>
+
+        <audio id="alarm" src="audio/alarm.wav" loop="loop"></audio>
+
+        <script src = "lib/p5.js"> </script>
+
+        <script src = "js/util.js"> </script>
+        <script src = "js/gui.js"> </script>
+        <script src = "js/holiday.js"> </script>
+        <script src = "js/parse-input-util.js"> </script>
+        <script src = "js/parse-input.js"> </script>
+        <script src = "js/main.js"> </script>
+        
+        
+    </body>
+</html>

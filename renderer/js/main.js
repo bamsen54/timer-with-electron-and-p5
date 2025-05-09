@@ -83,12 +83,14 @@ function setup() {
     textAlign(CENTER, CENTER);
 
     pixelDensity(3);
+
+    console.log(width, height);
 }
 
 function draw() {
 
     
-   background(32, 30, 30);
+    background(32, 30, 30);
 
     window_resized();
     
@@ -102,11 +104,12 @@ function draw() {
     if( alarm_done ) {
 
         program_status = 'input';
+        
         alarm_sound.pause();
     }
 
-    if( input_field.style.display == '' )
-        program_status = 'input';
+    /* if( input_field.style.display == '' )
+        program_status = 'input'; */
 
     display_when_alarm_will_go_off(time_when_alarm_will_go_off);
 }

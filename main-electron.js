@@ -20,20 +20,32 @@ function create_main_window() {
     main_window.loadFile(path.join(__dirname, './pre-renderer/pre.html'));
 }
 
-
-
-
 const template = [
+
+    {
+
+        label: 'Timer',
+        click: () => { main_window.loadFile(path.join(__dirname, './pre-renderer/pre.html'))} 
+
+    },
+
+    {
+
+        label: 'settings'
+        
+        
+    },
 
     {
         label:'help',
         click: () => { main_window.loadFile(path.join(__dirname, './renderer-help/help.html'))}
-       /*  submenu:[ 
-            {
-                label:'',
-                click: () => { main_window.loadFile(path.join(__dirname, './renderer-help/help.html'))}
-            }
-        ] */
+       
+    },
+
+    {
+
+        label: 'GitHub',
+        click: () => {  main_window.loadFile(path.join(__dirname, './renderer-misc/github.html'))}
     }
 ]
 

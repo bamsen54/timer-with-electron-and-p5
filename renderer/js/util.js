@@ -65,7 +65,7 @@ const proper_spelling_of_months = {
     'apr'    : 'april',
     'jun'    : 'june',
     'jul'    : 'july',
-    'aug'    : 'augusti',
+    'aug'    : 'august',
     'sep'    : 'september',
     'oct'    : 'october',
     'nov'    : 'november',
@@ -89,7 +89,6 @@ const days_in_month_string = {
 };
 
 const month_as_index = {
-
     
     'january'  :  0, // jan
     'february' :  1, // feb

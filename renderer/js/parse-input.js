@@ -205,7 +205,7 @@ function convert_months_to_proper_spelling(input_list) {
     return input_list;
 }
 
-function day_month_and_year(input_list) {
+function parse_day_month_and_year(input_list) {
 
     input_list = JSON.parse(JSON.stringify(input_list));
 
@@ -248,7 +248,7 @@ function day_month_and_year(input_list) {
 }
 
 
-function date_and_month(input_list) {
+function parse_date_and_month(input_list) {
 
     input_list = JSON.parse(JSON.stringify(input_list));
 
@@ -313,6 +313,39 @@ function date_and_month(input_list) {
         
     }
     
+    return input_list;
+}
+
+function parse_month(input_list) {
+
+    const now = new Date();
+
+    let this_year = now.getFullYear();
+
+    for( let k = 0; k < input_list.length; k++ ) {
+
+        const entry = input_list[k];
+
+        if( !days_in_month_string[entry] )
+            continue;
+
+        const month = month_as_index[entry];
+
+        let as_string = input_list.join(' ');
+
+        let seconds_to_date = get_seconds_to_date(this_year, month, 1);
+
+        if( seconds_to_date < 0)
+            seconds_to_date = get_seconds_to_date(this_year + 1, month, 1);
+
+        as_string  = as_string.replaceAll(entry, seconds_to_date + ' seconds');
+
+        input_list = as_string.split(' ');
+
+        input_list = convert_numeric_entries_to_integer(input_list);
+
+    }
+
     return input_list;
 }
 
@@ -455,8 +488,9 @@ const parser = new function() {
         input_list = convert_all_numeric_strings_to_int(input_string);
         input_list = convert_months_to_proper_spelling(input_list);
         input_list = convert_numeric_entries_to_integer(input_list);
-        input_list = day_month_and_year(input_list);
-        input_list = date_and_month(input_list);
+        input_list = parse_day_month_and_year(input_list);
+        input_list = parse_date_and_month(input_list);
+        input_list = parse_month(input_list);
         input_list = convert_numeric_entries_to_integer(input_list);
         input_list = convert_time_units_to_proper_spelling(input_list);
         input_list = convert_numeric_entries_to_integer(input_list);

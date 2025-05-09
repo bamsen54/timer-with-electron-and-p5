@@ -81,6 +81,11 @@ function display_count_down(seconds_left) {
         return;
     }
 
+    pixelDensity(5);
+    
+
+    textFont('Verdana');
+
     textAlign(CENTER, CENTER);
     
     fill(200);
@@ -90,7 +95,7 @@ function display_count_down(seconds_left) {
         let text_display = seconds_to_standard_format(seconds_left);
         text_display     = remove_surplus_spaces(text_display);
 
-        const text_size = find_max_font_size_that_fits(text_display, 0.9 * width, 0.9 * height);
+        const text_size = find_max_font_size_that_fits(text_display, 0.95 * width, 0.95 * height);
 
         textSize(text_size);
         

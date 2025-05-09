@@ -87,71 +87,71 @@ function get_easter_date(easter_day) {
 function parse_holiday(input_string) {
 
     // holy week
-    input_string = input_string.replaceAll('holy-monday', get_easter_date('holy monday'));
-    input_string = input_string.replaceAll('holy monday', get_easter_date('holy monday'));
-    input_string = input_string.replaceAll('holymonday', get_easter_date('holy monday'));
-    input_string = input_string.replaceAll('holy-tuesday', get_easter_date('holy tuesday'));
-    input_string = input_string.replaceAll('holy tuesday', get_easter_date('holy tuesday'));
-    input_string = input_string.replaceAll('holytuesday', get_easter_date('holy tuesday'));
-    input_string = input_string.replaceAll('holy-wednesday', get_easter_date('holy wednesday'));
-    input_string = input_string.replaceAll('holy wednesday', get_easter_date('holy wednesday'));
-    input_string = input_string.replaceAll('holywednesday', get_easter_date('holy wednesday'));
-    input_string = input_string.replaceAll('maundy-thursday', get_easter_date('maundy thursday'));
-    input_string = input_string.replaceAll('maundy thursday', get_easter_date('maundy thursday'));
-    input_string = input_string.replaceAll('maundythursday', get_easter_date('maundy thursday'));
-    input_string = input_string.replaceAll('good-friday', get_easter_date('good friday'));
-    input_string = input_string.replaceAll('good friday', get_easter_date('good friday'));
-    input_string = input_string.replaceAll('goodfriday', get_easter_date('good friday'));
-    input_string = input_string.replaceAll('easter-eve', get_easter_date('easter eve'));
-    input_string = input_string.replaceAll('easter eve', get_easter_date('easter eve'));
-    input_string = input_string.replaceAll('eastereve', get_easter_date('easter eve'));
+    input_string = input_string.replaceAll('holy-monday', get_easter_date('holy monday') + '+0sec');
+    input_string = input_string.replaceAll('holy monday', get_easter_date('holy monday') + '+0sec');
+    input_string = input_string.replaceAll('holymonday', get_easter_date('holy monday') + '+0sec');
+    input_string = input_string.replaceAll('holy-tuesday', get_easter_date('holy tuesday') + '+0sec');
+    input_string = input_string.replaceAll('holy tuesday', get_easter_date('holy tuesday') + '+0sec');
+    input_string = input_string.replaceAll('holytuesday', get_easter_date('holy tuesday') + '+0sec');
+    input_string = input_string.replaceAll('holy-wednesday', get_easter_date('holy wednesday') + '+0sec');
+    input_string = input_string.replaceAll('holy wednesday', get_easter_date('holy wednesday') + '+0sec');
+    input_string = input_string.replaceAll('holywednesday', get_easter_date('holy wednesday') + '+0sec');
+    input_string = input_string.replaceAll('maundy-thursday', get_easter_date('maundy thursday') + '+0sec');
+    input_string = input_string.replaceAll('maundy thursday', get_easter_date('maundy thursday') + '+0sec');
+    input_string = input_string.replaceAll('maundythursday', get_easter_date('maundy thursday') + '+0sec');
+    input_string = input_string.replaceAll('good-friday', get_easter_date('good friday') + '+0sec');
+    input_string = input_string.replaceAll('good friday', get_easter_date('good friday') + '+0sec');
+    input_string = input_string.replaceAll('goodfriday', get_easter_date('good friday') + '+0sec');
+    input_string = input_string.replaceAll('easter-eve', get_easter_date('easter eve') + '+0sec');
+    input_string = input_string.replaceAll('easter eve', get_easter_date('easter eve') + '+0sec');
+    input_string = input_string.replaceAll('eastereve', get_easter_date('easter eve') + '+0sec');
 
-    input_string = input_string.replaceAll('easter-day', get_easter_date('easter'));
-    input_string = input_string.replaceAll('easter day', get_easter_date('easter'));
-    input_string = input_string.replaceAll('easterday', get_easter_date('easter'));
-    input_string = input_string.replaceAll('easter-sunday', get_easter_date('easter'));
-    input_string = input_string.replaceAll('easter sunday', get_easter_date('easter'));
-    input_string = input_string.replaceAll('eastersunday', get_easter_date('easter'));
-    input_string = input_string.replaceAll('easter', get_easter_date('easter'));
+    input_string = input_string.replaceAll('easter-day', get_easter_date('easter') + '+0sec');
+    input_string = input_string.replaceAll('easter day', get_easter_date('easter') + '+0sec');
+    input_string = input_string.replaceAll('easterday', get_easter_date('easter') + '+0sec');
+    input_string = input_string.replaceAll('easter-sunday', get_easter_date('easter') + '+0sec');
+    input_string = input_string.replaceAll('easter sunday', get_easter_date('easter') + '+0sec');
+    input_string = input_string.replaceAll('eastersunday', get_easter_date('easter') + '+0sec');
+    input_string = input_string.replaceAll('easter', get_easter_date('easter') + '+0sec');
     
     // christmas
-    input_string = input_string.replaceAll('christmas-eve', '24 december');
-    input_string = input_string.replaceAll('christmas eve', '24 december');
-    input_string = input_string.replaceAll('christmaseve', '24 december');
-    input_string = input_string.replaceAll('xmas-eve', '24 december');
-    input_string = input_string.replaceAll('xmas eve', '24 december');
-    input_string = input_string.replaceAll('xmaseve', '24 december');
+    input_string = input_string.replaceAll('christmas-eve', '24 december + 0sec');
+    input_string = input_string.replaceAll('christmas eve', '24 december + 0sec');
+    input_string = input_string.replaceAll('christmaseve', '24 december + 0sec');
+    input_string = input_string.replaceAll('xmas-eve', '24 december + 0sec');
+    input_string = input_string.replaceAll('xmas eve', '24 december + 0sec');
+    input_string = input_string.replaceAll('xmaseve', '24 december + 0sec');
 
-    input_string = input_string.replaceAll('christmas-day', '25 december');
-    input_string = input_string.replaceAll('christmas day', '25 december');
-    input_string = input_string.replaceAll('christmasday', '25 december');
-    input_string = input_string.replaceAll('christmas', '25 december');
-    input_string = input_string.replaceAll('xmas-day', '25 december');
-    input_string = input_string.replaceAll('xmas day', '25 december');
-    input_string = input_string.replaceAll('xmasday', '25 december');
-    input_string = input_string.replaceAll('xmas', '25 december');
+    input_string = input_string.replaceAll('christmas-day', '25 december + 0sec');
+    input_string = input_string.replaceAll('christmas day', '25 december + 0sec');
+    input_string = input_string.replaceAll('christmasday', '25 december + 0sec');
+    input_string = input_string.replaceAll('christmas', '25 december + 0sec');
+    input_string = input_string.replaceAll('xmas-day', '25 december + 0sec');
+    input_string = input_string.replaceAll('xmas day', '25 december + 0sec');
+    input_string = input_string.replaceAll('xmasday', '25 december + 0sec');
+    input_string = input_string.replaceAll('xmas', '25 december + 0sec');
 
-    input_string = input_string.replaceAll('boxing-day', '26 december');
-    input_string = input_string.replaceAll('boxing day', '26 december');
-    input_string = input_string.replaceAll('boxingday', '26 december');
+    input_string = input_string.replaceAll('boxing-day', '26 december + 0sec');
+    input_string = input_string.replaceAll('boxing day', '26 december + 0sec');
+    input_string = input_string.replaceAll('boxingday', '26 december + 0sec');
 
     // new year
-    input_string = input_string.replaceAll("new-year's-eve", '31 december');
-    input_string = input_string.replaceAll("new-years-eve", '31 december');
-    input_string = input_string.replaceAll("new-year-eve", '31 december');
-    input_string = input_string.replaceAll("new year's eve", '31 december');
-    input_string = input_string.replaceAll("new years-eve", '31 december');
-    input_string = input_string.replaceAll("newyear'seve", '31 december');
-    input_string = input_string.replaceAll("newyearseve", '31 december');
-    input_string = input_string.replaceAll("newyeareve", '31 december');
+    input_string = input_string.replaceAll("new-year's-eve", '31 december + 0sec');
+    input_string = input_string.replaceAll("new-years-eve", '31 december + 0sec');
+    input_string = input_string.replaceAll("new-year-eve", '31 december + 0sec');
+    input_string = input_string.replaceAll("new year's eve", '31 december + 0sec');
+    input_string = input_string.replaceAll("new years-eve", '31 december + 0sec');
+    input_string = input_string.replaceAll("newyear'seve", '31 december + 0sec');
+    input_string = input_string.replaceAll("newyearseve", '31 december + 0sec');
+    input_string = input_string.replaceAll("newyeareve", '31 december + 0sec');
 
     // last chronologically since it runs when the year is over
-    input_string = input_string.replaceAll("newyear's", '1 january');
-    input_string = input_string.replaceAll("newyears", '1 january');
-    input_string = input_string.replaceAll("newyear", '1 january');
-    input_string = input_string.replaceAll("new year's", '1 january');
-    input_string = input_string.replaceAll("new years", '1 january');
-    input_string = input_string.replaceAll("new year", '1 january');
+    input_string = input_string.replaceAll("newyear's", '1 january + 0sec');
+    input_string = input_string.replaceAll("newyears", '1 january + 0sec');
+    input_string = input_string.replaceAll("newyear", '1 january + 0sec');
+    input_string = input_string.replaceAll("new year's", '1 january + 0sec');
+    input_string = input_string.replaceAll("new years", '1 january + 0sec');
+    input_string = input_string.replaceAll("new year", '1 january + 0sec');
 
     return input_string;
 }

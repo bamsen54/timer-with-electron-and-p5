@@ -456,15 +456,27 @@ const parser = new function() {
         input_list = input_string.split(' ');
 
         input_list = convert_all_numeric_strings_to_int(input_string);
+        //print(input_list, 'numerics to int');
         input_list = convert_months_to_proper_spelling(input_list);
+        //print(input_list, 'proper spelling');
+
         input_list = convert_numeric_entries_to_integer(input_list);
+        //print(input_list, 'numerics to int');
+
         input_list = parse_day_month_and_year(input_list);
+        //print(input_list, 'parse daty month and year');
         input_list = parse_date_and_month(input_list);
         input_list = parse_month(input_list);
-        input_list = convert_numeric_entries_to_integer(input_list);
+        //input_list = convert_numeric_entries_to_integer(input_list);
         input_list = convert_time_units_to_proper_spelling(input_list);
-        input_list = convert_numeric_entries_to_integer(input_list);
+        //input_list = convert_numeric_entries_to_integer(input_list);
+
+        //print(input_list, 'before use signs');
+
         input_list = use_signs(input_list);
+
+        //print(input_list, 'after use signs');
+
         
         if( !is_on_simple_form( input_list) )
             return;

@@ -234,6 +234,6 @@ function get_seconds_to_week_day(weeK_day) {
 // https://stackoverflow.com/questions/1779013/check-if-string-contains-only-digits
 function is_a_number_string(string){
 
-    return parseInt(string);
+    return Number.isInteger(parseInt(string));
 }
 

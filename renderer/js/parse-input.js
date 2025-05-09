@@ -209,9 +209,9 @@ function parse_day_month_and_year(input_list) {
 
     input_list = JSON.parse(JSON.stringify(input_list));
 
-    const length = input_list.length;
+
     
-    for ( let entry = 1; entry < length; entry++ ) {
+    for ( let entry = 1; entry < input_list.length; entry++ ) {
 
         const day   = input_list[entry - 1];
         const month = month_as_index[input_list[entry]];
@@ -247,89 +247,59 @@ function parse_day_month_and_year(input_list) {
     return input_list;
 }
 
-
 function parse_date_and_month(input_list) {
 
     input_list = JSON.parse(JSON.stringify(input_list));
-
-    const this_year      = (new Date).getFullYear();
-    const next_leap_year = get_next_leap_year(); 
-
-    const length = input_list.length;
-
-    for( let k = 1; k < length; k++ ) {
-
-        const left  = input_list[k - 1]; // left of possible month
-        const right = input_list[k];     // possible month
-
-        if( !Number.isInteger(left) )
-            continue;
-        
-        if( !days_in_month_string[right] )
-            continue;
-        
-        if( left <= 0)
-            continue;
-
-        const date  = left + ' ' + right; // the string day month
-
-        if(right == 'february') {
-            
-            // go to next leap day
-            if( left == 29 ) {
-                
-                let as_string = input_list.join(' ');
-
-                const month = month_as_index[right];
-
-                const seconds_to_next_leap = get_seconds_to_date(next_leap_year, month, left);
-                // replace day and month to the appropriate seconds and convert back to list
-                as_string  = as_string.replaceAll(date, seconds_to_next_leap + ' second');
-                input_list = as_string.split(' ');
-
-                continue;
-            }
-        }
-
-    if( left <= days_in_month_string[right] ) {
-            
-            const month = month_as_index[right];
-            const date  = left + ' ' + right; // since left is day and right is month
-
-            let as_string = input_list.join(' ');
-
-            let seconds_to_date = get_seconds_to_date(this_year, month, left);
-
-            // if this date has already been this year use next year
-            if( seconds_to_date < 0 )
-                seconds_to_date = get_seconds_to_date(this_year + 1, month, left);
-            
-            // replace day and month to the appropriate seconds and convert back to list
-            as_string  = as_string.replaceAll(date, seconds_to_date + ' seconds');
-            input_list = as_string.split(' ');
-        }
-
-        input_list = convert_numeric_entries_to_integer(input_list);
-        
-    }
-    
-    return input_list;
-}
-
-function parse_month(input_list) {
 
     const now = new Date();
 
     let this_year = now.getFullYear();
 
-    for( let k = 0; k < input_list.length; k++ ) {
+    const length = input_list.length;
+    
+    for ( let entry = 1; entry < input_list.length; entry++ ) {
 
-        const entry = input_list[k];
+        const day   = input_list[entry - 1];
+        const month = month_as_index[input_list[entry]];
+        
+        const month_string = input_list[entry];
 
-        if( !days_in_month_string[entry] )
+        const date = day + ' ' + month_string;
+
+        if( !Number.isInteger(day) )
             continue;
 
-        const month = month_as_index[entry];
+        if( !Number.isInteger(month) )
+            continue;
+        
+        let seconds_to_date = get_seconds_to_date(this_year, month, day);
+
+        if( seconds_to_date < 0)
+            seconds_to_date = get_seconds_to_date(this_year + 1, month, day);
+
+        let as_string = input_list.join(' ');
+        as_string     = as_string.replaceAll(date, seconds_to_date + ' seconds');
+        input_list    = as_string.split(' ');
+        input_list    = convert_numeric_entries_to_integer(input_list);
+    }
+
+    return input_list;
+}
+
+function parse_month(input_list) {
+    
+    const now = new Date();
+
+    let this_year = now.getFullYear();
+
+    for( let entry = 0; entry < input_list.length; entry++ ) {
+
+        const month        = month_as_index[input_list[entry]];
+
+        const month_string = input_list[entry];
+
+        if( !Number.isInteger(month) )
+            continue;
 
         let as_string = input_list.join(' ');
 
@@ -338,7 +308,7 @@ function parse_month(input_list) {
         if( seconds_to_date < 0)
             seconds_to_date = get_seconds_to_date(this_year + 1, month, 1);
 
-        as_string  = as_string.replaceAll(entry, seconds_to_date + ' seconds');
+        as_string  = as_string.replaceAll(month_string, seconds_to_date + ' seconds');
 
         input_list = as_string.split(' ');
 

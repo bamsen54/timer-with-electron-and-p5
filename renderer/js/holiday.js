@@ -86,6 +86,11 @@ function get_easter_date(easter_day) {
 
 function parse_holiday(input_string) {
 
+    // we add +0sec in all of these since they are on the form 
+    //day month and if we write for example christmas christmas 
+    // we get 25 december 25 december which will be read as ( 25 december 25) december
+    // which is not valid but 25 december (+0sec) 25december is
+
     // holy week
     input_string = input_string.replaceAll('holy-monday', get_easter_date('holy monday') + '+0sec');
     input_string = input_string.replaceAll('holy monday', get_easter_date('holy monday') + '+0sec');

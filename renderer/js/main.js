@@ -17,10 +17,10 @@
  * 
  *  2. (count down ⏰)  Then start_alarm will be called in main.js. It will hide
  *                      the title, input field and the start button. Then it will
- *                      set unix_ms_alarm to the time the alarm should go off. Then  
+ *                      set unix_timer_alarm to the time the alarm should go off. Then  
  *                      it uses the setInterval so that the function timer_run in main.js
  *                      is run every 100 ms. timer_run checks weather the current
- *                      unix is above the unix_ms_alarm. If it is the alarm will go off. 
+ *                      unix is above the unix_timer_alarm. If it is the alarm will go off. 
  * 
  *                      At the same time a count down will be displayed by
  *                      the function display_count_down in gui.js.
@@ -89,7 +89,6 @@ function setup() {
 
 function draw() {
 
-    
     background(32, 30, 30);
 
     window_resized();
@@ -104,12 +103,10 @@ function draw() {
     if( alarm_done ) {
 
         program_status = 'input';
+        unix_time_alarm = null;
         
         alarm_sound.pause();
     }
-
-    /* if( input_field.style.display == '' )
-        program_status = 'input'; */
 
     display_when_alarm_will_go_off(time_when_alarm_will_go_off);
 }
@@ -142,12 +139,15 @@ function count_down() {
 
     if( program_status == 'count down' ) {
 
-        const seconds_left = ceil((unix_ms_alarm - (new Date()).getTime()) / 1000);
+        const seconds_left = ceil((unix_timer_alarm - (new Date()).getTime()) / 1000);
 
-        if( seconds_left <= 0)
-            program_status = 'expired';
+        if( seconds_left <= 0) {
+
+            program_status  = 'expired';
+            unix_time_alarm = null;
+
+        }
         
-
         display_count_down(seconds_left); // it will figure out the seconds left automatically.
     }
 }
@@ -188,20 +188,17 @@ function keyPressed(event) {
     if( key == 'r' && program_status == 'count down' ) {
         
         program_status = 'input';
-        alarm_done = true;
+        
         input_field.style.display  = '';
         title.style.display        = '';
         start_button.style.display = '';
-        
+
+        alarm_done = true;
     }
-
-    // test
-
-    
 }
 
 // ⏰ the program starts the countdown
-// by setting the unix_ms_alarm to the 
+// by setting the unix_timer_alarm to the 
 // current unix + the seconds of the alarm
 function start_alarm() {
 
@@ -221,13 +218,15 @@ function start_alarm() {
         program_status = 'count down'; // sets program state to run
         alarm_done = false;
 
-        unix_ms_alarm = Date.now() + seconds * 1000; // at what unix time stamp alarm should go off
+        unix_timer_alarm = Date.now() + seconds * 1000; // at what unix time stamp alarm should go off
 
         timer = setInterval( timer_run , 100); // actually starts alarm
 
         timer_go_off_has_been_calculated = false;
 
         time_when_alarm_will_go_off = calculate_at_what_time_alarm_will_go_off();
+
+        start_button.className = 'invalid';
     }
 }
 
@@ -248,12 +247,12 @@ function alarm_go_off() {
 // goes off
 function timer_run() {
 
-    // ✅ since unix_ms_alarm is set
+    // ✅ since unix_timer_alarm is set
     // to the number when unix will 
     // be unix at start + seconds the 
     // alarm will run, this means that
     // the alarm has expired
-    if( Date.now() >= unix_ms_alarm) {
+    if( Date.now() >= unix_timer_alarm) {
         
         clearInterval(timer);
         alarm_go_off();

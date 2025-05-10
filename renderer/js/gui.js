@@ -67,10 +67,10 @@ function seconds_to_standard_format(seconds) {
 
 function get_seconds_left() {
 
-    if( !unix_ms_alarm )
+    if( !unix_timer_alarm )
         return;
 
-    return ceil( ( unix_ms_alarm - Date.now() ) / 1000 ); 
+    return ceil( ( unix_timer_alarm - Date.now() ) / 1000 ); 
 }
 
 function display_count_down(seconds_left) {

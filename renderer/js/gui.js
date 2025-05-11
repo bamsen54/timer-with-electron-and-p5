@@ -104,13 +104,11 @@ function display_count_down(seconds_left) {
     
     else if( program_status == 'expired' ) {
 
-        console.log('displaying time expired')
         let text_display = 'Time Expired! - Press Space To Turn Off Alarm';
         
         const text_size = find_max_font_size_that_fits(text_display, 0.9 * width);
 
         textSize(text_size);
-        
         
         text(text_display, width / 2, height / 2);
 

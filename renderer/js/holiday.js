@@ -82,6 +82,69 @@ function get_easter_date(easter_day) {
         
         return date.getDate() + ' ' + index_to_month_name[month];
     }
+
+    return date.getDate() + ' ' + index_to_month_name[month];
+}
+
+function thanksgiving(year) {
+
+    const date = new Date();
+
+    date.setFullYear(year);
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    date.setMonth(10);
+
+    date.setDate(22);
+
+    const current_week_day = date.getDay();
+
+    const days_to_next_thursday = (7 - current_week_day + 4) % 7; // (7 - current_week_day) is days to sunday
+                                                                  // + 4 to thursday if current_week_day is wednesday or 
+                                                                  // earlier we get get next thursday so we add % 7 fixes that
+    return [10, 22 + days_to_next_thursday];
+}
+
+function get_thanksgiving_date() {
+
+    const now = new Date();
+
+    const this_year = now.getFullYear();
+
+    let [month, day] = thanksgiving(this_year);
+    
+    const date = new Date();
+
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    date.setDate(day);
+    date.setMonth(month);
+
+    if( date - now < 0 ) {
+
+        [month, day] = thanksgiving(this_year + 1);
+
+        date.setDate(day);
+        date.setMonth(month);
+        date.setFullYear(this_year + 1)
+
+        return date.getDate() + ' ' + index_to_month_name[month];
+    }
+
+    date.setFullYear(this_year);
+
+    return date.getDate() + ' ' + index_to_month_name[month];
+}
+
+function get_black_friday_date() {
+
+    const thanksgiving_date = get_thanksgiving_date();
+
+    const day = parseInt(get_thanksgiving_date().split(' ')[0]);
+
+    return (day + 1) + ' november';
 }
 
 function parse_holiday(input_string) {
@@ -119,6 +182,17 @@ function parse_holiday(input_string) {
     input_string = input_string.replaceAll('eastersunday', get_easter_date('easter') + '+0sec');
     input_string = input_string.replaceAll('easter', get_easter_date('easter') + '+0sec');
     
+
+    // thanksgiving
+    input_string = input_string.replaceAll('thanksgiving', get_thanksgiving_date() + '+0sec');
+
+    // black friday
+    input_string = input_string.replaceAll('black-friday', get_black_friday_date() + '+0sec');
+    input_string = input_string.replaceAll('black friday', get_black_friday_date() + '+0sec');
+    input_string = input_string.replaceAll('blackfriday', get_black_friday_date() + '+0sec');
+
+
+
     // christmas
     input_string = input_string.replaceAll('christmas-eve', '24 december + 0sec');
     input_string = input_string.replaceAll('christmas eve', '24 december + 0sec');

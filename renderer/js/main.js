@@ -46,6 +46,8 @@ let unix_time_alarm; // the unix timestamp when alarm should go off
 let program_status = 'input';
 let alarm_done = false;
 
+let unix_at_alarm_go_off = null;
+
 const timer_go_off = new Date();
 
 let timer_go_off_has_been_calculated = false;
@@ -84,7 +86,6 @@ function setup() {
 
     pixelDensity(3);
 
-    console.log(width, height);
 }
 
 function draw() {
@@ -108,7 +109,38 @@ function draw() {
         alarm_sound.pause();
     }
 
+    if( input_field.style.display == '' ) {
+        
+        program_status = 'input'
+
+        alarm_done = true;
+
+        unix_time_alarm = null;
+    }
+
     display_when_alarm_will_go_off(time_when_alarm_will_go_off);
+
+    const now = new Date();
+
+    if( unix_at_alarm_go_off ) {
+
+        const seconds_since_alarm_went_off = floor( (now - unix_at_alarm_go_off) / 1000 );
+        
+        if( seconds_since_alarm_went_off >= 10 ) {
+
+
+            program_status = 'input'; 
+
+            alarm_sound.pause();
+
+            input_field.style.display  = '';
+            title.style.display        = '';
+            start_button.style.display = '';
+
+            unix_at_alarm_go_off = null;
+        }
+
+    }
 }
     
 
@@ -141,7 +173,7 @@ function count_down() {
 
         const seconds_left = ceil((unix_timer_alarm - (new Date()).getTime()) / 1000);
 
-        if( seconds_left <= 0) {
+        if( seconds_left <= 0 && program_status == 'count down') {
 
             program_status  = 'expired';
             unix_time_alarm = null;
@@ -179,6 +211,8 @@ function keyPressed(event) {
         input_field.style.display  = '';
         title.style.display        = '';
         start_button.style.display = '';
+
+        unix_at_alarm_go_off = null;
     }
 
     if(program_status == 'debug' && key == ' ')
@@ -234,7 +268,9 @@ function alarm_go_off() {
 
     program_status = 'expired';
     
-    if( input_field.style.display != '')
+    unix_at_alarm_go_off = (new Date()).getTime();
+
+    if( input_field.style.display != '') 
         alarm_sound.play();
 }
 

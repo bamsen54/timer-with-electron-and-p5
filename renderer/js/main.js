@@ -120,27 +120,10 @@ function draw() {
 
     display_when_alarm_will_go_off(time_when_alarm_will_go_off);
 
-    const now = new Date();
+    turn_off_alarm_expired_state_after_a_while();
 
-    if( unix_at_alarm_go_off ) {
-
-        const seconds_since_alarm_went_off = floor( (now - unix_at_alarm_go_off) / 1000 );
         
-        if( seconds_since_alarm_went_off >= 10 ) {
-
-
-            program_status = 'input'; 
-
-            alarm_sound.pause();
-
-            input_field.style.display  = '';
-            title.style.display        = '';
-            start_button.style.display = '';
-
-            unix_at_alarm_go_off = null;
-        }
-
-    }
+    
 }
     
 
@@ -293,6 +276,37 @@ function timer_run() {
         clearInterval(timer);
         alarm_go_off();
         
+    }
+}
+
+function turn_off_alarm_expired_state_after_a_while() {
+
+    const now = new Date();
+
+    let max_seconds_of_expired_time;
+    const expired_time_limit = localStorage.getItem('expired time limit');
+
+    if( expired_time_limit == 'unlimited' )
+        return;
+
+    max_seconds_of_expired_time = parseInt(expired_time_limit);
+    
+    if( unix_at_alarm_go_off ) {
+
+        const seconds_since_alarm_went_off = floor( (now - unix_at_alarm_go_off) / 1000 );
+        
+        if( seconds_since_alarm_went_off >= max_seconds_of_expired_time ) {
+
+            program_status = 'input'; 
+
+            alarm_sound.pause();
+
+            input_field.style.display  = '';
+            title.style.display        = '';
+            start_button.style.display = '';
+
+            unix_at_alarm_go_off = null;
+        }
     }
 }
 

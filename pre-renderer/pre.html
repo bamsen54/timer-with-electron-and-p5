@@ -10,8 +10,15 @@
 <body>
     
     <script>
-        localStorage.clear();
+        
+        localStorage.removeItem('timer input from help');
+        
+        if( !localStorage.getItem('expired time limit') )
+            localStorage.setItem('expired time limit', 'unlimited');
+
+        
         window.location.href = '../renderer/index.html';
+    
     </script>
     
 </body>

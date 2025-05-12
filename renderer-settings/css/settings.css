@@ -2,13 +2,15 @@
 body {
 
     background-color: rgb(33, 30, 30);
+    margin-left: 1%;
     
 }
 
 label {
 
-    color: ghostwhite;
+    color: lightgray;
     display: block;
+    font-size:130%;
 }
 
 

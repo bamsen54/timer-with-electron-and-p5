@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "timer",
   "main": "main-electron.js",
+  
   "scripts": {
     "start": "electron .",
     "package": "build",

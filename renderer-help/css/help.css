@@ -2,6 +2,8 @@
 body {
 
     background-color: rgb(33, 30, 30)
+
+    
 }
 
 li {
@@ -9,7 +11,10 @@ li {
     color: rgb(214, 24, 122);;
     font-size: 250%;
 
-    cursor: pointer
+    cursor: pointer;
+
+    font-family: "Lucida Console", "Courier New", monospace;
+
 
 }
 

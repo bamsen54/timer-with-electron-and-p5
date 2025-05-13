@@ -72,14 +72,16 @@ function setup() {
     //--------------------------------------------------------------
 
     alarm_sound = document.getElementById('alarm');
+    alarm_sound.volume = parseFloat(localStorage.getItem('alarm volume'));
     
     if( localStorage.getItem('timer input from help') ) {
         
         input_field.value = localStorage.getItem('timer input from help')
         alarm_input_is_valid = true;
-        localStorage.clear();
+        //input_field.value = '';
+        localStorage.removeItem('timer input from help');
         start_alarm();
-        input_field.value = '';
+        
     }
 
     textAlign(CENTER, CENTER);
@@ -122,8 +124,6 @@ function draw() {
 
     turn_off_alarm_expired_state_after_a_while();
 
-        
-    
 }
     
 

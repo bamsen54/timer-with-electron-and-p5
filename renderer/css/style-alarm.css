@@ -14,6 +14,11 @@ input {
     cursor: text !important;
 }
 
+::selection {
+  
+  background: rgb(145, 150, 166);
+}
+
 #title {
 
 

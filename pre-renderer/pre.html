@@ -16,6 +16,8 @@
         if( !localStorage.getItem('expired time limit') )
             localStorage.setItem('expired time limit', 'unlimited');
 
+        if( !localStorage.getItem('alarm volume') )
+            localStorage.setItem('alarm volume', 1);
         
         window.location.href = '../renderer/index.html';
     

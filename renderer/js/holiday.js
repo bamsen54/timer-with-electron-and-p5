@@ -154,6 +154,27 @@ function parse_holiday(input_string) {
     // we get 25 december 25 december which will be read as ( 25 december 25) december
     // which is not valid but 25 december (+0sec) 25december is
 
+    // valentine's day
+    input_string = input_string.replaceAll("valentine's-day", '14 february' + '+0sec');
+    input_string = input_string.replaceAll("valentines-day", '14 february' + '+0sec');
+    input_string = input_string.replaceAll("valentine's day", '14 february' + '+0sec');
+    input_string = input_string.replaceAll("valentines day", '14 february' + '+0sec');
+    input_string = input_string.replaceAll("valentine'sday", '14 february' + '+0sec');
+    input_string = input_string.replaceAll("valentinesday", '14 february' + '+0sec');
+    input_string = input_string.replaceAll("valentine's", '14 february' + '+0sec');
+    input_string = input_string.replaceAll("valentines", '14 february' + '+0sec');
+    input_string = input_string.replaceAll("valentine", '14 february' + '+0sec');
+
+    // π day
+    input_string = input_string.replaceAll('π-day', '14 march' + '+0sec');
+    input_string = input_string.replaceAll('π day', '14 march' + '+0sec');
+    input_string = input_string.replaceAll('πday', '14 march' + '+0sec');
+    input_string = input_string.replaceAll('π', '14 march' + '+0sec');
+    input_string = input_string.replaceAll('pi-day', '14 march' + '+0sec');
+    input_string = input_string.replaceAll('pi day', '14 march' + '+0sec');
+    input_string = input_string.replaceAll('piday', '14 march' + '+0sec');
+    input_string = input_string.replaceAll('pi', '14 march' + '+0sec');
+
     // holy week
     input_string = input_string.replaceAll('holy-monday', get_easter_date('holy monday') + '+0sec');
     input_string = input_string.replaceAll('holy monday', get_easter_date('holy monday') + '+0sec');
@@ -182,6 +203,10 @@ function parse_holiday(input_string) {
     input_string = input_string.replaceAll('eastersunday', get_easter_date('easter') + '+0sec');
     input_string = input_string.replaceAll('easter', get_easter_date('easter') + '+0sec');
     
+    
+    // halloween
+    input_string = input_string.replaceAll('halloween', '31 october' + '+0sec');
+
 
     // thanksgiving
     input_string = input_string.replaceAll('thanksgiving', get_thanksgiving_date() + '+0sec');

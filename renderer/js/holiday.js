@@ -191,8 +191,6 @@ function parse_holiday(input_string) {
     input_string = input_string.replaceAll('black friday', get_black_friday_date() + '+0sec');
     input_string = input_string.replaceAll('blackfriday', get_black_friday_date() + '+0sec');
 
-
-
     // christmas
     input_string = input_string.replaceAll('christmas-eve', '24 december + 0sec');
     input_string = input_string.replaceAll('christmas eve', '24 december + 0sec');

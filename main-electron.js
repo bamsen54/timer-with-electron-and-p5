@@ -23,26 +23,19 @@ function create_main_window() {
 const template = [
 
     {
-
         label: 'Timer',
         click: () => { main_window.loadFile(path.join(__dirname, './pre-renderer/pre.html'))} 
-
     },
 
     {
 
         label: 'settings',
         click: () => { main_window.loadFile(path.join(__dirname, './renderer-settings/settings.html'))}
-
-
-        
-        
     },
 
     {
         label:'help',
         click: () => { main_window.loadFile(path.join(__dirname, './renderer-help/help.html'))}
-       
     },
 
     {

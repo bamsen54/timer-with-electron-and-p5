@@ -99,9 +99,6 @@ function check_if_date_is_valid(year, month, day) {
     if( month > 11 )
         return false;
 
-    
-    
-
     if( is_leap_year(year) && month == 1 && day == 29) // leap day
         return true;
 

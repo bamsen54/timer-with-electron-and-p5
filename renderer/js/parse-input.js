@@ -209,8 +209,6 @@ function parse_day_month_and_year(input_list) {
 
     input_list = JSON.parse(JSON.stringify(input_list));
 
-
-    
     for ( let entry = 1; entry < input_list.length; entry++ ) {
 
         const day   = input_list[entry - 1];
@@ -255,8 +253,6 @@ function parse_date_and_month(input_list) {
 
     let this_year = now.getFullYear();
 
-    const length = input_list.length;
-    
     for ( let entry = 1; entry < input_list.length; entry++ ) {
 
         const day   = input_list[entry - 1];
@@ -271,12 +267,22 @@ function parse_date_and_month(input_list) {
 
         if( !Number.isInteger(month) )
             continue;
-        
-        let seconds_to_date = get_seconds_to_date(this_year, month, day);
+
+        let seconds_to_date;
+
+        // handle 29 february
+        if( month == 1 && day == 29)
+            seconds_to_date = get_seconds_to_date(get_next_leap_year(), month, day);
+
+        // everything else
+        else
+            seconds_to_date = get_seconds_to_date(this_year, month, day);
 
         if( seconds_to_date < 0)
             seconds_to_date = get_seconds_to_date(this_year + 1, month, day);
 
+        // convert to string to replace date (mm/dd) with seconds
+        // then convert back to list
         let as_string = input_list.join(' ');
         as_string     = as_string.replaceAll(date, seconds_to_date + ' seconds');
         input_list    = as_string.split(' ');

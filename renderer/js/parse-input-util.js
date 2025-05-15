@@ -226,6 +226,17 @@ function get_seconds_to_week_day(weeK_day) {
     return floor((date - now) / 1000);
 }
 
+// inputs that do not belong to any other category
+function misc(input_string) {
+
+    input_string = input_string.replaceAll('tomorrow', '00:00');
+    input_string = input_string.replaceAll('fortnight', '14days');
+    input_string = input_string.replaceAll('noon', '12:00');
+    input_string = input_string.replaceAll('midnight', '00:00');
+
+    return input_string;
+}
+
 // thanks to 
 // Saranga Jayaruwan
 // https://stackoverflow.com/questions/1779013/check-if-string-contains-only-digits

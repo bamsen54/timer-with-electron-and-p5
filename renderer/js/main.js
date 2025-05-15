@@ -58,7 +58,14 @@ let time_when_alarm_will_go_off = '';
 const input_field  = document.getElementById('input');
 const start_button = document.getElementById('start');
 
+
+const count_down_text = document.getElementById('count-down-span');
+
 input_field.style.cursor = 'default'
+
+// thanks to Oriol
+// https://stackoverflow.com/questions/22559830/html-prevent-space-bar-from-scrolling-page
+window.addEventListener('keydown', (e) => { if(e.keyCode == 32 && e.target == document.body) e.preventDefault();})
 
 function setup() {
 
@@ -87,13 +94,12 @@ function setup() {
     textAlign(CENTER, CENTER);
 
     pixelDensity(3);
-
 }
 
 function draw() {
 
     background(32, 30, 30);
-
+    
     window_resized();
     
     menu();
@@ -120,6 +126,7 @@ function draw() {
         unix_time_alarm = null;
     }
 
+    
     display_when_alarm_will_go_off(time_when_alarm_will_go_off);
 
     turn_off_alarm_expired_state_after_a_while();
@@ -165,6 +172,11 @@ function count_down() {
         
         display_count_down(seconds_left); // it will figure out the seconds left automatically.
     }
+
+    else {
+
+        count_down_text.textContent = '';
+    }
 }
 
 function expired() {
@@ -209,6 +221,8 @@ function keyPressed(event) {
         input_field.style.display  = '';
         title.style.display        = '';
         start_button.style.display = '';
+
+        count_down_text.textContent = '';
 
         alarm_done = true;
     }

@@ -78,11 +78,12 @@ function display_count_down(seconds_left) {
    if( alarm_done ) {
 
         alarm_sound.pause();
-        return;
+        
     }
 
     pixelDensity(5);
     
+    noSmooth();
 
     textFont('Verdana');
 
@@ -97,9 +98,12 @@ function display_count_down(seconds_left) {
 
         const text_size = find_max_font_size_that_fits(text_display, 0.95 * width, 0.95 * height);
 
-        textSize(text_size);
         
-        text(text_display, width / 2, height / 2);
+            count_down_text.textContent = text_display;
+
+        
+           
+
     }
     
     else if( program_status == 'expired' ) {

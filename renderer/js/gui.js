@@ -108,6 +108,9 @@ function display_count_down(seconds_left) {
     
     else if( program_status == 'expired' ) {
 
+        if( input_field.style.display == '' )
+            return;
+
         let text_display = 'Time Expired! - Press Space To Turn Off Alarm';
         
         const text_size = find_max_font_size_that_fits(text_display, 0.9 * width);
@@ -155,11 +158,7 @@ function display_when_alarm_will_go_off(date) {
                     
     const date_string = dsl[0] + ' '+ dsl[4] + ' ' + day + ' ' + dsl[1] + ' ' + dsl[3] + ' ' + dsl[5];
     
-
-    textSize(20);
-    noStroke();
-    fill(150, 200);
-    text(date_string, width / 2, height - 15);
+    count_down_finished_at_span.textContent = date_string;
 }
 
 function window_resized() {

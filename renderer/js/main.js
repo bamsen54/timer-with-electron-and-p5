@@ -60,12 +60,14 @@ const start_button = document.getElementById('start');
 
 
 const count_down_text = document.getElementById('count-down-span');
+const count_down_finished_at_span = document.getElementById('count-down-finished-at-span')
 
 input_field.style.cursor = 'default'
 
 // thanks to Oriol
 // https://stackoverflow.com/questions/22559830/html-prevent-space-bar-from-scrolling-page
 window.addEventListener('keydown', (e) => { if(e.keyCode == 32 && e.target == document.body) e.preventDefault();})
+window.onscroll = function () { window.scrollTo(0, 0); };
 
 function setup() {
 
@@ -176,6 +178,8 @@ function count_down() {
     else {
 
         count_down_text.textContent = '';
+        count_down_finished_at_span.textContent = '';
+
     }
 }
 
@@ -223,6 +227,7 @@ function keyPressed(event) {
         start_button.style.display = '';
 
         count_down_text.textContent = '';
+        count_down_finished_at_span.textContent = '';
 
         alarm_done = true;
     }

@@ -1,101 +1,53 @@
 
-
-/**
- * 
- *  This is a project based on e.ggtimer at e.ggtimer.com! All credit goes to them.
- */
-
-/**
- *  What happens when user enters a valid input
- *     
- *  1. (input ▶️)      The input is processed by parser.parse_input at parse-input.js
- *                      which converts the input to a appropriate number. Which is
- *                      the seconds the alarm will be set to.
- * 
- *                   
- *                      
- * 
- *  2. (count down ⏰)  Then start_alarm will be called in main.js. It will hide
- *                      the title, input field and the start button. Then it will
- *                      set unix_timer_alarm to the time the alarm should go off. Then  
- *                      it uses the setInterval so that the function timer_run in main.js
- *                      is run every 100 ms. timer_run checks weather the current
- *                      unix is above the unix_timer_alarm. If it is the alarm will go off. 
- * 
- *                      At the same time a count down will be displayed by
- *                      the function display_count_down in gui.js.
- * 
- * 
- * 
- * 
- *  3. (expired ✅)     When the alarm goes off the sound alarm.waw will be played
- * 
- */
-
-let alarm_input_is_valid = false;
-
-let alarm_sound; // wav file as alarm when count down is over
-
-let unix_time_alarm; // the unix timestamp when alarm should go off
-                     // if current unix time stamp is x then alarm
-                     // should go off at x + input_field to seconds
-
 // input      : when the user inputs the text into the input
 // count down : when the user has started the alarm and the program counts down
 // expired    : when the alarm has reached 0 and the alarm sound is played  
 let program_status = 'input';
-let alarm_done = false;
 
-let unix_at_alarm_go_off = null;
+/* DEALS WITH ALARM */
 
-const timer_go_off = new Date();
+    // the unix timestamp when alarm should go off
+    // if current unix time stamp is x then alarm
+    // should go off at x + input_field to seconds
+    let unix_time_alarm; 
 
-let timer_go_off_has_been_calculated = false;
+    let alarm_input_is_valid = false; // uses parser.parse_input and if it gives a valid time back this is set to true
+    let alarm_expired        = false; // when alarm is in expired mode this is true
 
-let time_when_alarm_will_go_off = '';
+    let alarm_sound; // wav file as alarm when count down is over
+
+    alarm_sound        = document.getElementById('alarm');
+    alarm_sound.volume = parseFloat(localStorage.getItem('alarm volume'));
+
+/* DEALS WITH GUI (what users sees but does not interact with)*/
+
+    let time_when_alarm_will_go_off = '';  
+
+    // displays time left of alarm
+    const count_down_text             = document.getElementById('count-down-span');
+
+    // displays date and time when alarm will be expired
+    const count_down_finished_at_span = document.getElementById('count-down-finished-at-span');
+
+    // thanks to Oriol
+    // https://stackoverflow.com/questions/22559830/html-prevent-space-bar-from-scrolling-page
+    window.addEventListener('keydown', (e) => { if(e.keyCode == 32 && e.target == document.body) e.preventDefault();})
+    window.onscroll = function () { window.scrollTo(0, 0); };
 
 
-const input_field  = document.getElementById('input');
-const start_button = document.getElementById('start');
+/* DEALS WITH USER INTERACTION */
 
+    const input_field  = document.getElementById('input');
+    const start_button = document.getElementById('start');
 
-const count_down_text = document.getElementById('count-down-span');
-const count_down_finished_at_span = document.getElementById('count-down-finished-at-span')
+    input_field.style.cursor = 'default'
 
-input_field.style.cursor = 'default'
-
-// thanks to Oriol
-// https://stackoverflow.com/questions/22559830/html-prevent-space-bar-from-scrolling-page
-window.addEventListener('keydown', (e) => { if(e.keyCode == 32 && e.target == document.body) e.preventDefault();})
-window.onscroll = function () { window.scrollTo(0, 0); };
 
 function setup() {
 
-    // sets canvas at top left top left corner with the exact
-    // dimensions of the window
-    // the z-index is - 1 so that it is behind all the dom elements
-    //--------------------------------------------------------------
-    const canvas = createCanvas(windowWidth, windowHeight);
-    canvas.position(0, 0);
-    canvas.style('z-index', - 1);
-    //--------------------------------------------------------------
-
-    alarm_sound = document.getElementById('alarm');
-    alarm_sound.volume = parseFloat(localStorage.getItem('alarm volume'));
+    create_background_canvas();
     
-    if( localStorage.getItem('timer input from help') ) {
-        
-        input_field.value = localStorage.getItem('timer input from help')
-        alarm_input_is_valid = true;
-        //input_field.value = '';
-        localStorage.removeItem('timer input from help');
-        start_alarm();
-        
-    }
-
-    textAlign(CENTER, CENTER);
-
-    pixelDensity(3);
+    use_help_input();
 }
 
 function draw() {
@@ -109,9 +61,9 @@ function draw() {
     expired();
 
     if( unix_time_alarm > (new Date()).getTime() )
-        alarm_done = true;
+        alarm_expired = true;
 
-    if( alarm_done ) {
+    if( alarm_expired ) {
 
         program_status = 'input';
         unix_time_alarm = null;
@@ -119,20 +71,9 @@ function draw() {
         alarm_sound.pause();
     }
 
-    if( input_field.style.display == '' ) {
-        
-        program_status = 'input'
-
-        alarm_done = true;
-
-        unix_time_alarm = null;
-    }
-
-    
     display_when_alarm_will_go_off(time_when_alarm_will_go_off);
 
     turn_off_alarm_expired_state_after_a_while();
-
 }
     
 
@@ -177,7 +118,7 @@ function count_down() {
 
     else {
 
-        count_down_text.textContent = '';
+        //count_down_text.textContent = '';
         count_down_finished_at_span.textContent = '';
 
     }
@@ -211,13 +152,14 @@ function keyPressed(event) {
         title.style.display        = '';
         start_button.style.display = '';
 
+        count_down_text.textContent = '';
+
         unix_at_alarm_go_off = null;
     }
 
     if(program_status == 'debug' && key == ' ')
         parser.parse_input(input_field.value);
 
-    // temporary
     if( key == 'r' && program_status == 'count down' ) {
         
         program_status = 'input';
@@ -229,7 +171,7 @@ function keyPressed(event) {
         count_down_text.textContent = '';
         count_down_finished_at_span.textContent = '';
 
-        alarm_done = true;
+        alarm_expired = true;
     }
 }
 
@@ -252,13 +194,13 @@ function start_alarm() {
         title.style.display = 'none';
 
         program_status = 'count down'; // sets program state to run
-        alarm_done = false;
+        alarm_expired = false;
 
         unix_timer_alarm = Date.now() + seconds * 1000; // at what unix time stamp alarm should go off
 
         timer = setInterval( timer_run , 100); // actually starts alarm
 
-        timer_go_off_has_been_calculated = false;
+        //timer_go_off_has_been_calculated = false;
 
         time_when_alarm_will_go_off = calculate_at_what_time_alarm_will_go_off();
 

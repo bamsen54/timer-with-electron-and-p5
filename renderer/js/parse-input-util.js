@@ -26,7 +26,6 @@ function calculate_seconds_until_hhmm(hhmm) {
     return difference + ' seconds ';
 }
 
-
 function is_leap_year(year) {
 
     let is_leap_year = false;
@@ -41,7 +40,6 @@ function is_leap_year(year) {
         is_leap_year = true;
 
     return is_leap_year;
-
 }
 
 function get_next_leap_year() {
@@ -159,7 +157,7 @@ function get_all_date_sub_strings(input_string) {
     for( let k = 0; k < matches.length; k++ )
         matches[k] = matches[k][0];
 
-    // bug matches contain duplicates
+    // bug, matches contain duplicates
     // this fixes it
     return [...new Set(matches)];
 }

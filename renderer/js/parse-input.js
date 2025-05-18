@@ -415,7 +415,6 @@ function simple_form_to_seconds(input_list) {
         const second = input_list[k + 1];
         
         seconds_total += (first * time_unit_to_seconds[second]);
-
     }
 
     return seconds_total;

@@ -176,6 +176,32 @@ const week_day_to_index = {
     'saturday'  : 6
 }
 
+function create_background_canvas() {
+
+    // sets canvas at top left top left corner with the exact
+    // dimensions of the window
+    // the z-index is - 1 so that it is behind all the dom elements
+    //--------------------------------------------------------------
+    const canvas = createCanvas(windowWidth, windowHeight);
+    canvas.position(0, 0);
+    canvas.style('z-index', - 1);
+
+    return canvas;
+}
+
+function use_help_input() {
+
+    if( localStorage.getItem('timer input from help') ) {
+        
+        input_field.value = localStorage.getItem('timer input from help');
+        localStorage.removeItem('timer input from help');
+        alarm_input_is_valid = true;
+        
+        start_alarm();
+        input_field.value = '';
+    }
+}
+
 function is_string_in_list(list, string) {
 
     for( const element of list ) {

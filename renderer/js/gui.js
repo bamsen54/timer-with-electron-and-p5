@@ -1,7 +1,5 @@
 
 
-
-
 /*
     Handles Everything that deals with converting seconds to proper form and displayng it
 */
@@ -13,7 +11,6 @@ function get_quotient_and_remainder(integer, divisor) {
     const remainder = integer % divisor;
 
     return [quotient, remainder];
-
 }
 
 function seconds_to_standard_format(seconds) {
@@ -75,22 +72,6 @@ function get_seconds_left() {
 
 function display_count_down(seconds_left) {
 
-   if( alarm_done ) {
-
-        alarm_sound.pause();
-        
-    }
-
-    pixelDensity(5);
-    
-    noSmooth();
-
-    textFont('Verdana');
-
-    textAlign(CENTER, CENTER);
-    
-    fill(200);
-
     if( seconds_left  ) {
         
         let text_display = seconds_to_standard_format(seconds_left);
@@ -99,33 +80,13 @@ function display_count_down(seconds_left) {
         const text_size = find_max_font_size_that_fits(text_display, 0.95 * width, 0.95 * height);
 
         
-            count_down_text.textContent = text_display;
-
-        
-           
-
+        count_down_text.textContent = text_display;
     }
     
     else if( program_status == 'expired' ) {
 
-        if( input_field.style.display == '' )
-            return;
-
-        let text_display = 'Time Expired! - Press Space To Turn Off Alarm';
-        
-        const text_size = find_max_font_size_that_fits(text_display, 0.9 * width);
-
-        textSize(text_size);
-        
-        text(text_display, width / 2, height / 2);
-
-        //text(text_display, width / 2, height / 2);
+        count_down_text.textContent = 'Alarm Expired!';
     }
-}
-
-function integer_division(num, divisor) {
-
-    return floor(num / divisor);
 }
 
 function calculate_at_what_time_alarm_will_go_off() {

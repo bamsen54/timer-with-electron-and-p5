@@ -108,6 +108,10 @@ function draw() {
 
     turn_off_alarm_expired_state_after_a_while();
 
+    // bug where we see input text field but program_status is in expired
+    if( input_field.className != 'input-field-not-visible' && input_field.style.display == '')
+        program_status = 'input';
+
     
 }
     
@@ -315,6 +319,9 @@ function timer_run() {
 }
 
 function turn_off_alarm_expired_state_after_a_while() {
+
+    if( program_status != 'expired' )
+        return;
 
     const now = new Date();
 

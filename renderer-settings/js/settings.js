@@ -2,7 +2,7 @@
 
 function setup() {
 
-    document.getElementById('expired-time-limit').value =   localStorage.getItem('expired time limit');
+    document.getElementById('expired-time-limit').value = localStorage.getItem('expired time limit');
 
     if( localStorage.getItem('ongoing-alarm') == 'expired' )
         localStorage.setItem('ongoing-alarm', 'none');
@@ -12,8 +12,12 @@ function draw() {
 
     const expired_time_limit = document.getElementById('expired-time-limit').value;
     
-    if( expired_time_limit == '10' ) 
-        localStorage.setItem('expired time limit', 3);
+    if( expired_time_limit == '05' ) 
+        localStorage.setItem('expired time limit', 5);
+
+    else if( expired_time_limit == '10' )
+        localStorage.setItem('expired time limit', 10);
+
 
     else if( expired_time_limit == '15' ) 
         localStorage.setItem('expired time limit', 15);

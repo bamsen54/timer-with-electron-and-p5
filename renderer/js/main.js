@@ -4,6 +4,14 @@
 // expired    : when the alarm has reached 0 and the alarm sound is played  
 let program_status = 'input';
 
+const title        = document.getElementById('title-text');
+const input_field  = document.getElementById('input');
+const start_button = document.getElementById('start');
+
+const ongoing_alarm = localStorage.getItem('ongoing-alarm');
+
+
+
 /* DEALS WITH ALARM */
 
     // the unix timestamp when alarm should go off
@@ -31,14 +39,15 @@ let program_status = 'input';
 
     // thanks to Oriol
     // https://stackoverflow.com/questions/22559830/html-prevent-space-bar-from-scrolling-page
-    window.addEventListener('keydown', (e) => { if(e.keyCode == 32 && e.target == document.body) e.preventDefault();})
-    window.onscroll = function () { window.scrollTo(0, 0); };
-
+    window.addEventListener('keydown', (e) => { 
+        
+        if(e.key == ' ' && e.target == document.body)
+             e.preventDefault();
+    })
 
 /* DEALS WITH USER INTERACTION */
 
-    const input_field  = document.getElementById('input');
-    const start_button = document.getElementById('start');
+    
 
     input_field.style.cursor = 'default'
 
@@ -48,6 +57,47 @@ function setup() {
     create_background_canvas();
     
     use_help_input();
+
+   const ongoing_alarm = localStorage.getItem('ongoing-alarm');
+    
+    if( ongoing_alarm == 'none' ) {
+
+        // all of these start off as hidden so that going back to timer does not show then if not in none
+        title.className = '';
+        input_field.className = '';
+        start_button.className = 'invalid';
+
+    }
+
+    else if( ongoing_alarm == 'expired' ) {
+
+        program_status = 'expired';
+
+        input_field.style.display = 'none';
+        start_button.style.display = 'none';
+        title.style.display = 'none';
+
+        alarm_sound.play();
+
+    }
+
+    else {
+
+        const alarm_information = JSON.parse(ongoing_alarm);
+
+        const unix_timer_info_as_integer = parseInt(alarm_information.unix_time_alarm_info);
+
+        const seconds_left = floor( (unix_timer_info_as_integer - (new Date()).getTime()) / 1000 ) ;
+
+        input_field.value = seconds_left + ' seconds';
+
+        time_when_alarm_will_go_off = alarm_expired.time_when_alarm_will_go_off_info;
+        
+        alarm_input_is_valid = true;
+        
+        start_alarm();
+        input_field.value = '';
+    } 
 }
 
 function draw() {
@@ -93,7 +143,7 @@ function menu() {
 
         else {
             
-            start_button.className = 'invalid';
+            //start_button.className = 'invalid';
 
             alarm_input_is_valid = false;
         }
@@ -152,7 +202,13 @@ function keyPressed(event) {
         title.style.display        = '';
         start_button.style.display = '';
 
+        title.className = '';
+        input_field.className = '';
+        start_button.className = 'invalid';
+
         count_down_text.textContent = '';
+
+        count_down_text.style.display = 'none';
 
         unix_at_alarm_go_off = null;
     }
@@ -167,6 +223,10 @@ function keyPressed(event) {
         input_field.style.display  = '';
         title.style.display        = '';
         start_button.style.display = '';
+
+        title.className = '';
+        input_field.className = '';
+        start_button.className = 'invalid';
 
         count_down_text.textContent = '';
         count_down_finished_at_span.textContent = '';
@@ -183,6 +243,8 @@ function start_alarm() {
     if( program_status == 'input' && alarm_input_is_valid ) {
 
         const input_value = input_field.value;
+        input_field.value = '';
+
         const seconds     = parser.parse_input(input_value); // seconds that alarm runs
 
         if( Number.isNaN(seconds) )
@@ -192,6 +254,8 @@ function start_alarm() {
         input_field.style.display = 'none';
         start_button.style.display = 'none';
         title.style.display = 'none';
+
+        count_down_text.style.display = '';
 
         program_status = 'count down'; // sets program state to run
         alarm_expired = false;
@@ -205,12 +269,29 @@ function start_alarm() {
         time_when_alarm_will_go_off = calculate_at_what_time_alarm_will_go_off();
 
         start_button.className = 'invalid';
+
+        // setting ongoing alarm in localStorage
+
+        const alarm_information = {
+
+            unix_time_alarm_info: unix_timer_alarm,
+            time_when_alarm_will_go_off_info: time_when_alarm_will_go_off
+
+        };
+
+        localStorage.setItem('ongoing-alarm', JSON.stringify(alarm_information));
+
+        input_field.className = 'input-field-not-visible';
+    
+        return alarm_information;
     }
 }
 
 function alarm_go_off() {
 
     program_status = 'expired';
+
+    localStorage.setItem('ongoing-alarm', 'expired');
     
     unix_at_alarm_go_off = (new Date()).getTime();
 

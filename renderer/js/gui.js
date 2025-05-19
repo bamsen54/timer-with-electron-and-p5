@@ -87,6 +87,10 @@ function display_count_down(seconds_left) {
 
         count_down_text.textContent = 'Alarm Expired!';
     }
+
+    else
+        count_down_text.textContent = '';
+
 }
 
 function calculate_at_what_time_alarm_will_go_off() {
@@ -106,6 +110,9 @@ function calculate_at_what_time_alarm_will_go_off() {
 }
 
 function display_when_alarm_will_go_off(date) {
+
+    if( !date )
+        return;
 
     if( program_status != 'count down' )
         return;

@@ -3,6 +3,9 @@
 function setup() {
 
     document.getElementById('expired-time-limit').value =   localStorage.getItem('expired time limit');
+
+    if( localStorage.getItem('ongoing-alarm') == 'expired' )
+        localStorage.setItem('ongoing-alarm', 'none');
 }
 
 function draw() {
@@ -23,5 +26,20 @@ function draw() {
 
     else if( expired_time_limit == 'unlimited' ) 
         localStorage.setItem('expired time limit', 'unlimited');
+
+    const alarm_information = localStorage.getItem('ongoing-alarm');
+
+    if( alarm_information != 'none' && alarm_information != 'expired' ) {
+
+        const alarm_information_object = JSON.parse(alarm_information);
+
+        const unix_time_alarm = floor(alarm_information_object.unix_time_alarm_info);
+
+        if( (new Date()).getTime() > unix_time_alarm ) {
+            
+            localStorage.setItem('ongoing-alarm', 'expired');
+            window.location.href = '../renderer/index.html';
+        }
+    }
 }
 

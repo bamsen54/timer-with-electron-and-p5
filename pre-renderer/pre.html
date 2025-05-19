@@ -18,6 +18,9 @@
 
         if( !localStorage.getItem('alarm volume') )
             localStorage.setItem('alarm volume', 1);
+       
+        /* if alarm ongoing we assign an object literal stringified with necessary information */
+        localStorage.setItem('ongoing-alarm', 'none'); 
         
         window.location.href = '../renderer/index.html';
     

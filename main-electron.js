@@ -16,7 +16,7 @@ function create_main_window() {
         
     });
 
-   // main_window.webContents.openDevTools();
+    //main_window.webContents.openDevTools();
     main_window.loadFile(path.join(__dirname, './pre-renderer/pre.html'));
 }
 
@@ -24,7 +24,7 @@ const template = [
 
     {
         label: 'Timer',
-        click: () => { main_window.loadFile(path.join(__dirname, './pre-renderer/pre.html'))} 
+        click: () => { main_window.loadFile(path.join(__dirname, './renderer/index.html'))} 
     },
 
     {
@@ -36,12 +36,6 @@ const template = [
     {
         label:'help',
         click: () => { main_window.loadFile(path.join(__dirname, './renderer-help/help.html'))}
-    },
-
-    {
-
-        label: 'GitHub',
-        click: () => {  main_window.loadFile(path.join(__dirname, './renderer-misc/github.html'))}
     }
 ]
 

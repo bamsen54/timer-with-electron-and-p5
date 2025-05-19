@@ -53,6 +53,10 @@ span {
     user-select: none;
     color:honeydew;
     font-family: verdana;
+
+
+    margin-top: -5%;
+    
     float:center;
     margin-left: 3%;
     margin-right: 3%;
@@ -62,7 +66,7 @@ span {
 
     display:block;
     float:center;
-    font-size: 24px;
+    font-size: 16px;
     margin-bottom: 5px;
     font-family: verdana;
     color: gray;

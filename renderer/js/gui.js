@@ -64,10 +64,10 @@ function seconds_to_standard_format(seconds) {
 
 function get_seconds_left() {
 
-    if( !unix_timer_alarm )
+    if( !unix_time_alarm )
         return;
 
-    return ceil( ( unix_timer_alarm - Date.now() ) / 1000 ); 
+    return ceil( ( unix_time_alarm - Date.now() ) / 1000 ); 
 }
 
 function display_count_down(seconds_left) {

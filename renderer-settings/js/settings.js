@@ -13,7 +13,7 @@ function draw() {
     const expired_time_limit = document.getElementById('expired-time-limit').value;
     
     if( expired_time_limit == '10' ) 
-        localStorage.setItem('expired time limit', 10);
+        localStorage.setItem('expired time limit', 3);
 
     else if( expired_time_limit == '15' ) 
         localStorage.setItem('expired time limit', 15);

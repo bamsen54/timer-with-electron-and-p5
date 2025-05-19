@@ -3,6 +3,12 @@
     display: none;
 }
 
+body {
+
+    height: 100%;
+    overflow: hidden;
+}
+
 #main-body {
    
     background-color: rgb(33, 30, 30);
@@ -131,6 +137,7 @@ span {
     color: aliceblue;
     border: 1.5px solid white;
     border-radius: 5px;
+    cursor:not-allowed;
     
 }
 

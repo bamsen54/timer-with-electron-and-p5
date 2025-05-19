@@ -18,6 +18,8 @@
 
         if( !localStorage.getItem('alarm volume') )
             localStorage.setItem('alarm volume', 1);
+
+        localStorage.setItem('ongoing-alarm', 'none'); /* possible values: none ongoing expired */
         
         window.location.href = '../renderer/index.html';
     

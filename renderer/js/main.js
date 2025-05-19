@@ -31,9 +31,11 @@ let program_status = 'input';
 
     // thanks to Oriol
     // https://stackoverflow.com/questions/22559830/html-prevent-space-bar-from-scrolling-page
-    window.addEventListener('keydown', (e) => { if(e.keyCode == 32 && e.target == document.body) e.preventDefault();})
-    window.onscroll = function () { window.scrollTo(0, 0); };
-
+    window.addEventListener('keydown', (e) => { 
+        
+        if(e.key == ' ' && e.target == document.body)
+             e.preventDefault();
+    })
 
 /* DEALS WITH USER INTERACTION */
 
@@ -154,6 +156,8 @@ function keyPressed(event) {
 
         count_down_text.textContent = '';
 
+        count_down_text.style.display = 'none';
+
         unix_at_alarm_go_off = null;
     }
 
@@ -183,6 +187,8 @@ function start_alarm() {
     if( program_status == 'input' && alarm_input_is_valid ) {
 
         const input_value = input_field.value;
+        input_field.value = '';
+
         const seconds     = parser.parse_input(input_value); // seconds that alarm runs
 
         if( Number.isNaN(seconds) )
@@ -192,6 +198,8 @@ function start_alarm() {
         input_field.style.display = 'none';
         start_button.style.display = 'none';
         title.style.display = 'none';
+
+        count_down_text.style.display = '';
 
         program_status = 'count down'; // sets program state to run
         alarm_expired = false;

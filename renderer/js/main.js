@@ -125,7 +125,7 @@ function menu() {
 
         else {
             
-            //start_button.className = 'invalid';
+            start_button.className = 'invalid';
 
             alarm_input_is_valid = false;
         }

@@ -18,6 +18,97 @@ function lowercase_all(input_string) {
     return input_string.toLowerCase();
 }
 
+function parse_time_of_day_with_am_pm(input_string) {
+
+    const hhmm_regex_am    = new RegExp('[0-9][0-9]:[0-9][0-9][ ]*am', 'g');
+    const hhmm_regex_pm    = new RegExp('[0-9][0-9]:[0-9][0-9][ ]*pm', 'g');
+    const matches_hhmm_am  = [...input_string.matchAll(hhmm_regex_am)];
+    const matches_hhmm_pm  = [...input_string.matchAll(hhmm_regex_pm)];
+
+    const hh_regex_am      = new RegExp('[0-9]+[ ]*am', 'g');
+    const hh_regex_pm      = new RegExp('[0-9]+[ ]*pm', 'g');
+    const matches_hh_am  = [...input_string.matchAll(hh_regex_am)];
+    const matches_hh_pm  = [...input_string.matchAll(hh_regex_pm)];
+
+    for( let match of matches_hhmm_am ) {
+
+        let hhmm_am = match[0];
+        let hhmm    = hhmm_am.slice(0, 5);
+
+        let [hh, mm] = hhmm.split(':');
+
+        hh = parseInt(hh);
+
+        if( hh > 12 || hh < 0 )
+            continue;
+
+
+        hh = hh % 12; // am formula, any am is the same as 24 hour clock except when hh = 12 which is 00:mm on a  24 hour clock
+
+        if( hh < 10 )
+            hh = '0' + hh;
+
+        input_string = input_string.replaceAll(hhmm_am, hh + ':' + mm);
+    }
+
+    for( let match of matches_hhmm_pm ) {
+
+        let hhmm_am = match[0];
+        let hhmm    = hhmm_am.slice(0, 5);
+
+        let [hh, mm] = hhmm.split(':');
+
+        hh = parseInt(hh);
+
+        if( hh > 12 || hh < 0 )
+            continue;
+
+
+        if( hh != 12)
+            hh += 12; // am formula, any am is the same as 24 hour clock except when hh = 12 which is 00:mm on a  24 hour clock
+
+        if( hh < 10 )
+            hh = '0' + hh;
+
+        input_string = input_string.replaceAll(hhmm_am, hh + ':' + mm);
+    }
+
+    for( const match of matches_hh_am ) {
+
+        let hhmm_am = match[0];
+        let hh      = parseInt(hhmm_am.slice(0, hhmm_am.length - 2));
+
+        if( hh > 12 || hh < 0 )
+            continue;
+
+        hh = hh % 12; // am formula, any am is the same as 24 hour clock except when hh = 12 which is 00:mm on a  24 hour clock
+
+        if( hh < 10 )
+            hh = '0' + hh;
+
+        input_string = input_string.replaceAll(hhmm_am, hh + ':' + '00');
+    }
+
+     for( const match of matches_hh_pm ) {
+
+        let hhmm_pm = match[0];
+        let hh      = parseInt(hhmm_pm.slice(0, hhmm_pm.length - 2));
+
+        if( hh > 12 || hh < 0 )
+            continue;
+
+        if( hh != 12)
+            hh += 12; // am formula, any am is the same as 24 hour clock except when hh = 12 which is 00:mm on a  24 hour clock
+
+        if( hh < 10 )
+            hh = '0' + hh;
+
+        input_string = input_string.replaceAll(hhmm_pm, hh + ':' + '00');
+    }
+
+    return input_string;
+}
+
 // changes every instance of hourhour:minuteminute (e.g. 15:45)
 // 'x + seconds' where x is the amount of seconds from now to 15:45
 function parse_time_of_day(input_string) {
@@ -444,6 +535,7 @@ const parser = new function() {
 
         input_string = parse_holiday(input_string);
         input_string = parse_week_days(input_string);
+        input_string = parse_time_of_day_with_am_pm(input_string);
         input_string = parse_time_of_day(input_string);
         input_string = parse_full_date(input_string);
         //print(input_string, 'full date')

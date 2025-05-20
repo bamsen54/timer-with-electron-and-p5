@@ -25,7 +25,7 @@ const ongoing_alarm = localStorage.getItem('ongoing-alarm');
     let alarm_sound; // wav file as alarm when count down is over
 
     alarm_sound        = document.getElementById('alarm');
-    alarm_sound.volume = parseFloat(localStorage.getItem('alarm volume'));
+    alarm_sound.volume = parseFloat(localStorage.getItem('alarm volume')) / 100;
 
 /* DEALS WITH GUI (what users sees but does not interact with)*/
 
@@ -106,6 +106,9 @@ function draw() {
         display_when_alarm_will_go_off(time_when_alarm_will_go_off);
 
     turn_off_alarm_expired_state_after_a_while();
+
+    alarm_sound.volume = parseFloat(localStorage.getItem('alarm volume')) / 100;
+
 }
     
 

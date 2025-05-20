@@ -10,7 +10,7 @@ label {
 
     color: lightgray;
     display: block;
-    font-size:130%;
+    font-size:150%;
 }
 
 
@@ -71,4 +71,9 @@ option:nth-of-type(odd) {
 option:hover,
 option:focus {
   background: plum;
+}
+
+#volume {
+
+    accent-color: rgb(214, 24, 122);
 }

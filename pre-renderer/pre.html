@@ -17,7 +17,9 @@
             localStorage.setItem('expired time limit', 'unlimited');
 
         if( !localStorage.getItem('alarm volume') )
-            localStorage.setItem('alarm volume', 1);
+            localStorage.setItem('alarm volume', '100');
+
+        
        
         /* if alarm ongoing we assign an object literal stringified with necessary information */
         localStorage.setItem('ongoing-alarm', 'none'); 

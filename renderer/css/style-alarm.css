@@ -9,6 +9,7 @@ body {
     overflow: hidden;
 }
 
+
 #main-body {
    
     background-color: rgb(33, 30, 30);
@@ -33,7 +34,7 @@ input {
 span {
 
     color: white;
-    font-size: 64px;
+    font-size: 56px;
     text-align: center;
     align-self: center;
 
@@ -55,7 +56,7 @@ span {
     font-family: verdana;
 
 
-    margin-top: -5%;
+    margin-top: -10%;
     
     float:center;
     margin-left: 3%;

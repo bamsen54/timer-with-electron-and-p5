@@ -9,10 +9,18 @@
     </head>
     <body>
 
+    <script src = "lib/p5.js"> </script>
+    <script src = "js/settings.js"> </script>
+
+    
+    <label> Alarm Sound Volume </label>
+    <input type="range" id="volume" name="volume" min="0" max="100" />
     <form>
         <p>
             <label for="expired-time-limit"> Expired time limit </label>
+
             <select id="expired-time-limit">
+                
                 <button>
                     <selectedcontent></selectedcontent>
                 </button>
@@ -46,8 +54,6 @@
         </p>
     </form>
 
-    <script src = "lib/p5.js"> </script>
-    <script src = "js/settings.js"> </script>
-
+    
     </body>
 </html>

@@ -2,7 +2,10 @@
 
 function setup() {
 
+    document.getElementById('volume').value = parseFloat(localStorage.getItem('alarm volume'));
     document.getElementById('expired-time-limit').value = localStorage.getItem('expired time limit');
+    
+
 
     if( localStorage.getItem('ongoing-alarm') == 'expired' )
         localStorage.setItem('ongoing-alarm', 'none');
@@ -30,6 +33,12 @@ function draw() {
 
     else if( expired_time_limit == 'unlimited' ) 
         localStorage.setItem('expired time limit', 'unlimited');
+
+
+    const volume = document.getElementById('volume').value;
+    
+    localStorage.setItem('alarm volume', volume);
+
 
     const alarm_information = localStorage.getItem('ongoing-alarm');
 

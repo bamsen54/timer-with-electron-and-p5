@@ -3,6 +3,7 @@
 // count down : when the user has started the alarm and the program counts down
 // expired    : when the alarm has reached 0 and the alarm sound is played  
 let program_status = 'input';
+//console.log('program status changed to input')
 
 const title        = document.getElementById('title-text');
 const input_field  = document.getElementById('input');
@@ -19,7 +20,7 @@ const ongoing_alarm = localStorage.getItem('ongoing-alarm');
     let unix_at_alarm_go_off;
 
     let alarm_input_is_valid = false; // uses parser.parse_input and if it gives a valid time back this is set to true
-    let alarm_expired        = false; // when alarm is in expired mode this is true
+    
 
     let alarm_sound; // wav file as alarm when count down is over
 
@@ -51,7 +52,7 @@ function setup() {
     
     use_help_input();
 
-   const ongoing_alarm = localStorage.getItem('ongoing-alarm');
+    const ongoing_alarm = localStorage.getItem('ongoing-alarm');
     
     if( ongoing_alarm == 'none' ) {
 
@@ -64,6 +65,8 @@ function setup() {
     else if( ongoing_alarm == 'expired' ) {
 
         program_status = 'expired';
+        //console.log('program status changed to expired')
+
 
         input_field.style.display = 'none';
         start_button.style.display = 'none';
@@ -101,18 +104,10 @@ function draw() {
     count_down();
     expired();
 
-    
-
-   
-    display_when_alarm_will_go_off(time_when_alarm_will_go_off);
+    if( time_when_alarm_will_go_off )
+        display_when_alarm_will_go_off(time_when_alarm_will_go_off);
 
     turn_off_alarm_expired_state_after_a_while();
-
-    // bug where we see input text field but program_status is in expired
-    if( input_field.className != 'input-field-not-visible' && input_field.style.display == '')
-        program_status = 'input';
-
-    
 }
     
 
@@ -148,6 +143,8 @@ function count_down() {
         if( seconds_left <= 0 && program_status == 'count down') {
 
             program_status  = 'expired';
+            //console.log('program status changed to expired')
+
             unix_time_alarm = null;
 
         }
@@ -184,7 +181,8 @@ function keyPressed(event) {
     if( program_status == 'expired' && key == ' ') {
         
         program_status = 'input'; 
-        //alarm_expired  = false;
+        //console.log('program status changed to input')
+
 
         alarm_sound.pause();
 
@@ -200,6 +198,7 @@ function keyPressed(event) {
 
         count_down_text.style.display = 'none';
 
+        unix_time_alarm = null;
         unix_at_alarm_go_off = null;
     }
 
@@ -209,8 +208,9 @@ function keyPressed(event) {
     if( key == 'r' && program_status == 'count down' ) {
         
         program_status = 'input';
-        //alarm_expired  = false;
-        
+        //console.log('program status changed to input')
+
+
         count_down_text.style.display = 'none';
 
 
@@ -225,9 +225,10 @@ function keyPressed(event) {
         count_down_text.textContent = '';
         count_down_finished_at_span.textContent = '';
 
-        unix_time_alarm = null;
+        unix_time_alarm      = null;
+        unix_at_alarm_go_off = null;
 
-        //alarm_expired = true;
+
     }
 }
 
@@ -254,16 +255,19 @@ function start_alarm() {
         count_down_text.style.display = '';
 
         program_status = 'count down'; // sets program state to run
-        alarm_expired = false;
+        //console.log('program status changed to count down')
+
 
         unix_time_alarm = Date.now() + seconds * 1000; // at what unix time stamp alarm should go off
-        console.log(unix_time_alarm - Date.now())
+        //console.log(unix_time_alarm - Date.now())
 
         timer = setInterval( timer_run , 100); // actually starts alarm
 
         //timer_go_off_has_been_calculated = false;
 
         time_when_alarm_will_go_off = calculate_at_what_time_alarm_will_go_off();
+
+        //console.log(time_when_alarm_will_go_off)
 
         start_button.className = 'invalid';
 
@@ -287,6 +291,8 @@ function start_alarm() {
 function alarm_go_off() {
 
     program_status = 'expired';
+    //console.log('program status changed to expired')
+
 
     localStorage.setItem('ongoing-alarm', 'expired');
     
@@ -310,7 +316,7 @@ function timer_run() {
     // be unix at start + seconds the 
     // alarm will run, this means that
     // the alarm has expired
-    if( Date.now() >= unix_time_alarm) {
+    if( Date.now() >= unix_time_alarm && unix_time_alarm ) {
         
         clearInterval(timer);
         alarm_go_off();
@@ -339,8 +345,11 @@ function turn_off_alarm_expired_state_after_a_while() {
         
         if( seconds_since_alarm_went_off >= max_seconds_of_expired_time ) {
 
-            program_status = 'input'; 
+            console.log('alarm expired limit hit')
 
+            program_status = 'input'; 
+            //console.log('program status changed to input')
+            
             alarm_sound.pause();
 
             input_field.style.display  = '';
@@ -351,8 +360,6 @@ function turn_off_alarm_expired_state_after_a_while() {
             count_down_text.textContent = '';
 
             unix_at_alarm_go_off = null;
-
-            console.log('alarm expired limit hit')
         }
     }
 }

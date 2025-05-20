@@ -5,7 +5,7 @@
 
 function help_ten_min() {
 
-    localStorage.setItem('ongoing-alarm', 'none');
+    localStorage.setItem('ongoing-alarm', 'help');
     localStorage.setItem('timer input from help', '10min');
     window.location.href = '../renderer/index.html';
 }

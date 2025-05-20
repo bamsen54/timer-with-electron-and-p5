@@ -85,8 +85,6 @@ function setup() {
 
         input_field.value = seconds_left + ' seconds';
 
-        time_when_alarm_will_go_off = alarm_information.time_when_alarm_will_go_off_info;
-        
         alarm_input_is_valid = true;
         
         start_alarm();
@@ -266,6 +264,7 @@ function start_alarm() {
         //timer_go_off_has_been_calculated = false;
 
         time_when_alarm_will_go_off = calculate_at_what_time_alarm_will_go_off();
+        console.log(time_when_alarm_will_go_off, 'here 1');
 
         //console.log(time_when_alarm_will_go_off)
 

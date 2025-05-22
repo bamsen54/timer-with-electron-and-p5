@@ -3,17 +3,55 @@ body {
 
     background-color: rgb(33, 30, 30)
 
+}
+
+h1 {
+
+    color: rgb(230, 230, 230);
+
+    font-size: 26px;
+}
+
+p {
+
+    color: white;
+
+    font-size: 26px;
+}
+
+span {
+
+    color:orangered;
     
 }
 
-li {
+.shortcut {
 
-    color: rgb(214, 24, 122);;
-    font-size: 250%;
+    color: lightgray;
+    font-size: 150%;
 
     cursor: pointer;
 
-    font-family: "Lucida Console", "Courier New", monospace;
+    font-family: verdana;
+    
+    margin: 15px;
+
+    margin-left: 0px;
+}
+
+
+.valid-input {
+
+    color: rgb(214, 24, 122);
+    font-size: 150%;
+
+    cursor: pointer;
+
+    font-family: verdana;
+    
+    margin: 15px;
+
+    margin-left: 0px;
 }
 
 a {

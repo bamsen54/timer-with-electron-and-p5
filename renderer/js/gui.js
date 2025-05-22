@@ -131,5 +131,5 @@ function display_when_alarm_will_go_off(date) {
 
 function window_resized() {
 
-    resizeCanvas(windowWidth, windowHeight);
+    resizeCanvas(windowWidth, windowHeight - 50);
 }

@@ -1,3 +1,12 @@
+let alarm_sound; // wav file as alarm when count down is over
+
+function preload() {
+
+    alarm_sound        = document.getElementById('alarm');
+    alarm_sound.volume = parseFloat(localStorage.getItem('alarm volume')) / 100;
+
+}
+
 
 // input      : when the user inputs the text into the input
 // count down : when the user has started the alarm and the program counts down
@@ -8,6 +17,9 @@ let program_status = 'input';
 const title        = document.getElementById('title-text');
 const input_field  = document.getElementById('input');
 const start_button = document.getElementById('start');
+
+
+
 
 const ongoing_alarm = localStorage.getItem('ongoing-alarm');
 
@@ -22,10 +34,7 @@ const ongoing_alarm = localStorage.getItem('ongoing-alarm');
     let alarm_input_is_valid = false; // uses parser.parse_input and if it gives a valid time back this is set to true
     
 
-    let alarm_sound; // wav file as alarm when count down is over
-
-    alarm_sound        = document.getElementById('alarm');
-    alarm_sound.volume = parseFloat(localStorage.getItem('alarm volume')) / 100;
+    
 
 /* DEALS WITH GUI (what users sees but does not interact with)*/
 
@@ -39,11 +48,11 @@ const ongoing_alarm = localStorage.getItem('ongoing-alarm');
 
     // thanks to Oriol
     // https://stackoverflow.com/questions/22559830/html-prevent-space-bar-from-scrolling-page
-    window.addEventListener('keydown', (e) => { 
+    /* window.addEventListener('keydown', (e) => { 
         
         if(e.key == ' ' && e.target == document.body)
              e.preventDefault();
-    })
+    }) */
 
 
 function setup() {
@@ -285,6 +294,8 @@ function start_alarm() {
         localStorage.setItem('ongoing-alarm', JSON.stringify(alarm_information));
 
         input_field.className = 'input-field-not-visible';
+        
+
     
         return alarm_information;
     }

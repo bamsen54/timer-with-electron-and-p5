@@ -1,12 +1,53 @@
 
 
+function help_twenty_seconds() {
 
+    localStorage.setItem('ongoing-alarm', 'help');
+    localStorage.setItem('timer input from help', '20sec');
+    window.location.href = '../renderer/index.html';
+}
 
 
 function help_ten_min() {
 
     localStorage.setItem('ongoing-alarm', 'help');
     localStorage.setItem('timer input from help', '10min');
+    window.location.href = '../renderer/index.html';
+}
+
+function help_one_hour_thirty_minutes() {
+
+    localStorage.setItem('ongoing-alarm', 'help');
+    localStorage.setItem('timer input from help', '1hour30min');
+    window.location.href = '../renderer/index.html';
+}
+
+function help_16_20() {
+
+    localStorage.setItem('ongoing-alarm', 'help');
+    localStorage.setItem('timer input from help', '16:20');
+    window.location.href = '../renderer/index.html';
+}
+
+function help_29_february() {
+
+    localStorage.setItem('ongoing-alarm', 'help');
+    localStorage.setItem('timer input from help', '29 february');
+    window.location.href = '../renderer/index.html';
+
+}
+
+function help_28_nov() {
+
+    localStorage.setItem('ongoing-alarm', 'help');
+    localStorage.setItem('timer input from help', '28 nov');
+    window.location.href = '../renderer/index.html';
+}
+
+function help_christmas() {
+
+    localStorage.setItem('ongoing-alarm', 'help');
+    localStorage.setItem('timer input from help', 'christmas');
     window.location.href = '../renderer/index.html';
 }
 

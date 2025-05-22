@@ -15,7 +15,7 @@ function draw() {
 
     const expired_time_limit = document.getElementById('expired-time-limit').value;
     
-    if( expired_time_limit == '05' ) 
+    if( expired_time_limit == '5' ) 
         localStorage.setItem('expired time limit', 5);
 
     else if( expired_time_limit == '10' )
@@ -39,8 +39,10 @@ function draw() {
     
     localStorage.setItem('alarm volume', volume);
 
+   
 
     const alarm_information = localStorage.getItem('ongoing-alarm');
+     console.log(alarm_information)
 
     if( alarm_information != 'none' && alarm_information != 'expired' ) {
 
@@ -51,7 +53,7 @@ function draw() {
         if( (new Date()).getTime() > unix_time_alarm ) {
             
             localStorage.setItem('ongoing-alarm', 'expired');
-            window.location.href = '../renderer/index.html';
+            window.location.href = '../renderer/index.html'; 
         }
     }
 }

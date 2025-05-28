@@ -8,6 +8,10 @@ function preload() {
 
     
     alarm_sound.volume = volume;
+
+    //let str = loadStrings('test.txt');
+
+    //console.log(str);
 }
 
 
@@ -22,9 +26,11 @@ const input_field  = document.getElementById('input');
 const start_button = document.getElementById('start');
 
 
-
+const text = document.getElementById('text');
 
 const ongoing_alarm = localStorage.getItem('ongoing-alarm');
+
+let macros = null;
 
 /* DEALS WITH ALARM */
 
@@ -60,11 +66,20 @@ const ongoing_alarm = localStorage.getItem('ongoing-alarm');
 
 function setup() {
 
-    create_background_canvas();
-    
+    noCanvas();
+
+
     use_help_input();
 
     const ongoing_alarm = localStorage.getItem('ongoing-alarm');
+
+    const macros_string = localStorage.getItem('macros');
+
+    if( macros_string != '[]' )
+        macros = JSON.parse(macros_string);
+
+    
+
     
     if( ongoing_alarm == 'none' ) {
 

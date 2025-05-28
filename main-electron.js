@@ -16,7 +16,7 @@ function create_main_window() {
         
     });
 
-    main_window.webContents.openDevTools();
+    //main_window.webContents.openDevTools();
     main_window.loadFile(path.join(__dirname, './pre-renderer/pre.html'));
 }
 
@@ -40,10 +40,14 @@ const template = [
 
     {
 
+        label: 'macros',
+        click: () => { main_window.loadFile(path.join(__dirname, './renderer-macros/macros.html'))}
+    },
+
+    {
+
         label: 'licence',
         click: () => { main_window.loadFile(path.join(__dirname, './renderer-licence/licence.html'))}
-
-
     }
 ]
 

@@ -13,6 +13,24 @@
  */
 
 // replaces all letters with the lower case version
+
+function use_macros(input_string) {
+
+    if( !macros )
+        return input_string;
+
+    for( const macro of macros ) {
+
+        const [macro_word, replace_with] = macro.split('=');
+
+        //console.log(macro_word, '---' ,replace_with);
+
+        input_string = input_string.replaceAll(macro_word, replace_with);
+    }
+
+    return input_string;
+
+}
 function lowercase_all(input_string) {
 
     return input_string.toLowerCase();
@@ -529,6 +547,8 @@ function convert_time_units_to_proper_spelling(input_list) {
 const parser = new function() {
 
     this.parse_input = function(input_string) {
+
+        input_string = use_macros(input_string);
 
         input_string = lowercase_all(input_string);
         

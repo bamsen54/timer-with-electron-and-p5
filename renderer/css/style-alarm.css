@@ -170,3 +170,8 @@ span {
 
     visibility: hidden;
 }
+
+.not-visible {
+
+    visibility: hidden;
+}

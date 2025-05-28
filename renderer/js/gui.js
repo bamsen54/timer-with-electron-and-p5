@@ -121,8 +121,12 @@ function display_when_alarm_will_go_off(date) {
 
     let day = dsl[2];
 
-    if( day[0] == '0' )
-        day = day.slice(1, );
+    if( day ) { 
+
+        if( day[0] == '0' )
+            day = day.slice(1, );
+
+    }
                     
     const date_string = dsl[0] + ' '+ dsl[4] + ' ' + day + ' ' + dsl[1] + ' ' + dsl[3] + ' ' + dsl[5];
     

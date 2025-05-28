@@ -19,18 +19,28 @@ function use_macros(input_string) {
     if( !macros )
         return input_string;
 
-    for( const macro of macros ) {
+    for( let k = 0; k < macros.length; k ++ ) { 
 
-        const [macro_word, replace_with] = macro.split('=');
+        const old_input_string = input_string;
+    
+        for( const macro of macros ) {
 
-        //console.log(macro_word, '---' ,replace_with);
+            let [macro_word, replace_with] = macro.split('=');
 
-        input_string = input_string.replaceAll(macro_word, replace_with);
+            macro_word   = macro_word.trim();
+            replace_with = replace_with.trim(); 
+
+
+            input_string = input_string.replaceAll(macro_word, replace_with);
+        }
+
+        if( old_input_string == input_string )
+            break;
     }
 
     return input_string;
-
 }
+
 function lowercase_all(input_string) {
 
     return input_string.toLowerCase();

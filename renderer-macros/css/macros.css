@@ -9,13 +9,15 @@ body {
 }
 
 textarea {
-    width: 66%;
-    height: 50vh;
+    width: 75%;
+    height: 66vh;
 
     font-size: 26px;
 
     color:coral;
     background-color: black;
+
+    padding-left: 10px;
 }
 
 #alarm-info {

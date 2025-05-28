@@ -64,6 +64,18 @@ function timer_run() {
 
 function preload() {
 
+    macros.value = '';
+
+    if( localStorage.getItem('macros') != '[]' ) {
+
+        const macros_list = JSON.parse(localStorage.getItem('macros'));
+
+        for(const macro of macros_list) {
+
+            macros.value += macro + ';\n';
+        }
+    }
+
     alarm_sound  = document.getElementById('alarm');
     volume       = parseFloat(localStorage.getItem('alarm volume')) / 100; 
 
@@ -76,17 +88,7 @@ function setup() {
     
     const ongoing_alarm = localStorage.getItem('ongoing-alarm');
 
-    macros.value = '';
-
-    if( localStorage.getItem('macros') != '[]' ) {
-
-        const macros_list = JSON.parse(localStorage.getItem('macros'));
-
-        for(const macro of macros_list) {
-
-            macros.value += macro + ';\n';
-        }
-    }
+    
 
     if( ongoing_alarm != 'none') {
 
@@ -159,11 +161,13 @@ function seconds_to_standard_format(seconds) {
     return standard_format;
 }
 
-function draw() {
+function add_macros_to_local_storage() {
 
     let t = macros.value;
 
-    t = t.replaceAll(' ', '');
+    //t = t.replaceAll(' ', '');
+    t = t.replaceAll('\n', '');
+    t = t.replaceAll('\t', '');
     t = t.replaceAll('\n', '');
 
     t = t.split(';');
@@ -171,6 +175,13 @@ function draw() {
     t = t.filter((element) => {return element != ''});
 
     localStorage.setItem('macros', JSON.stringify(t));
+}
+
+function draw() {
+
+    
+    add_macros_to_local_storage();
+    
 
     if( unix_time_alarm != null ) {
 

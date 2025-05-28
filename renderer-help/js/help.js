@@ -22,6 +22,9 @@ function preload() {
 
     alarm_sound = document.getElementById('alarm');
 
+    volume       = parseFloat(localStorage.getItem('alarm volume')) / 100; 
+
+    alarm_sound.volume = volume;
 }
 
 function alarm_go_off() {
@@ -60,17 +63,19 @@ function timer_run() {
 
 function setup() {
 
-    alarm_information = JSON.parse(localStorage.getItem('ongoing-alarm'));
+    const ongoing_alarm = localStorage.getItem('ongoing-alarm');
 
-    if( alarm_information) {
+    if( ongoing_alarm != 'none') {
 
-        unix_time_alarm = alarm_information.unix_time_alarm_info;
+        alarm_information = JSON.parse(localStorage.getItem('ongoing-alarm'));
+
+            unix_time_alarm = alarm_information.unix_time_alarm_info;
 
         timer = setInterval( timer_run , 100); // actually starts alarm
 
         program_status = 'count down';
 
-    }   
+    } 
 }
 
 
@@ -215,6 +220,8 @@ function keyPressed(event) {
         unix_time_alarm = null;
 
         alarm_info_text.textContent = '-';
+
+        localStorage.setItem('ongoing-alarm', 'none');
 
 
     }

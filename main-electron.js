@@ -36,6 +36,14 @@ const template = [
     {
         label:'help',
         click: () => { main_window.loadFile(path.join(__dirname, './renderer-help/help.html'))}
+    },
+
+    {
+
+        label: 'licence',
+        click: () => { main_window.loadFile(path.join(__dirname, './renderer-licence/licence.html'))}
+
+
     }
 ]
 

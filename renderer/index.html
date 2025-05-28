@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title id="main-id">Timer</title>
+        <link rel="stylesheet" href="css/style-alarm.css">
+    </head>
+
+    <body id="main-body">
+
+        <div id = "title">
+            <h1 id="title-text" class="title-not-visible">Timer<h1>
+        </div>
+
+        <div id="input-div"> 
+            
+        <!--text field for alarm input-->
+        <input type="text" id="input" class="input-field-not-visible" cols = "100" autocomplete="off" spellcheck="false"> </input>
+
+        </div>
+        
+        <div id="start-div">
+            <button class="start-button-not-visible" id="start" onclick="start_alarm()"> Start </button>
+        </div>
+
+        <div id="count-down">
+            <span id="count-down-span"> </span>
+        </div>
+
+        <div id="count-down-finished-at">
+            <span id="count-down-finished-at-span"> </span>
+        </div>
+
+        <!--from https://mixkit.co/free-sound-effects/alarm/ -->
+        <audio id="alarm" src="audio/classic-short-alarm.wav" loop="loop"></audio>
+
+        <script src = "lib/p5.js"> </script>
+
+        <script src = "js/util.js"> </script>
+        <script src = "js/gui.js"> </script>
+        <script src = "js/holiday.js"> </script>
+        <script src = "js/parse-input-util.js"> </script>
+        <script src = "js/parse-input.js"> </script>
+        <script src = "js/main.js"> </script>
+        
+    </body>
+</html>

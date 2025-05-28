@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <link rel="stylesheet" href="css/pre.css">
+</head>
+<body>
+    
+    <script>
+        
+        localStorage.removeItem('timer input from help');
+        
+        if( !localStorage.getItem('expired time limit') )
+            localStorage.setItem('expired time limit', 'unlimited');
+
+        if( !localStorage.getItem('alarm volume') )
+            localStorage.setItem('alarm volume', '100');
+
+        
+       
+        /* if alarm ongoing we assign an object literal stringified with necessary information */
+        localStorage.setItem('ongoing-alarm', 'none'); 
+        
+        window.location.href = '../renderer/index.html';
+    
+    </script>
+    
+</body>
+</html>

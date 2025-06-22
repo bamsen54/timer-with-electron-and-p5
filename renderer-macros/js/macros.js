@@ -66,7 +66,7 @@ function preload() {
 
     macros.value = '';
 
-    if( localStorage.getItem('macros') != '[]' ) {
+    if( localStorage.getItem('macros') != '[]' && localStorage.getItem('macros')) {
 
         const macros_list = JSON.parse(localStorage.getItem('macros'));
 

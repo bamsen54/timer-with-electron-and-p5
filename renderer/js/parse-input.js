@@ -561,7 +561,9 @@ const parser = new function() {
         input_string = use_macros(input_string);
 
         input_string = lowercase_all(input_string);
-        
+
+        input_string = parse_full_date(input_string);
+
         input_string = parse_time_of_day_with_am_pm(input_string);
         input_string = parse_time_of_day(input_string);
         
@@ -572,7 +574,6 @@ const parser = new function() {
         input_string = parse_holiday(input_string);
         input_string = parse_week_days(input_string);
         
-        input_string = parse_full_date(input_string);
         //print(input_string, 'full date')
         input_string = add_number_spacing(input_string);
         //print(input_string, 'number spacing')

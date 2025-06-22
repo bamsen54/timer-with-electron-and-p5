@@ -68,19 +68,19 @@ function setup() {
 
     noCanvas();
 
-
     use_help_input();
 
     const ongoing_alarm = localStorage.getItem('ongoing-alarm');
 
     const macros_string = localStorage.getItem('macros');
 
-    if( macros_string != '[]' )
+    /* if( macros_string != '[]' && macros) {
         macros = JSON.parse(macros_string);
+        print(macros, 'macros here')
+    } */
 
-    
+    macros = JSON.parse(localStorage.getItem('macros'));
 
-    
     if( ongoing_alarm == 'none' ) {
 
         // all of these start off as hidden so that going back to timer does not show then if not in none
@@ -135,7 +135,7 @@ function draw() {
 
     turn_off_alarm_expired_state_after_a_while();
 
-    alarm_sound.volume = parseFloat(localStorage.getItem('alarm volume')) / 100;
+   // alarm_sound.volume = parseFloat(localStorage.getItem('alarm volume')) / 100;
 
 }
     

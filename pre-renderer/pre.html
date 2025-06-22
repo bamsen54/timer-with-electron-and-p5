@@ -10,8 +10,14 @@
 <body>
     
     <script>
+
+        let start = performance.now();
+
         
         localStorage.removeItem('timer input from help');
+        
+        localStorage.setItem('ongoing-alarm', 'none');
+
         
         if( !localStorage.getItem('expired time limit') )
             localStorage.setItem('expired time limit', 'unlimited');
@@ -20,13 +26,23 @@
             localStorage.setItem('alarm volume', '100');
 
         if( !localStorage.getItem('macros') )
-            localStorage.setItem('macros', '');
+            localStorage.setItem('macros', '[]');
+
+        if( localStorage.getItem('macros') == '' )
+            localStorage.setItem('macros', '[]');
+
+        
 
         
        
         /* if alarm ongoing we assign an object literal stringified with necessary information */
-        localStorage.setItem('ongoing-alarm', 'none'); 
+
+        // this is the problem
+
         
+        let end = performance.now();
+
+        console.log( Math.round((end - start) / 1000));
         window.location.href = '../renderer/index.html';
     
     </script>
